@@ -2,7 +2,7 @@
 .block {
   color: black;
   border: 1px solid;
-  border-color: oldlace;
+  border-color: rgba(0, 162, 255, 0.788);
   margin-top: 10px;
   margin-left: 5px;
   font-size: 13px;
@@ -16,7 +16,7 @@
 }
 ._textarea {
   border: 1px solid;
-  border-color:oldlace;
+  border-color:rgba(0, 162, 255, 0.788);
   height: 40px;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -46,6 +46,17 @@
   left: -100px;
 }
 ._date {
-  margin-left: 70px;
-  margin-top: -20px;
+  margin-left: 90px;
+  margin-top: -17px;
+}
+.page_hd {
+  background-color: whitesmoke;
+  height: 39px;
+}
+.page_hd_ch {
+  height: 38px;
+  color: white;
+  font-size: 15px;
+  border-radius: 0;
+  
 }

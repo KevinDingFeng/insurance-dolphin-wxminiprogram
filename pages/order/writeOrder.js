@@ -7,18 +7,23 @@ Page({
   data: {
     // text:"这是一个页面"
     picker1Value: 0,
-    picker1Range: ['北京', '上海', '广州', '深圳'],
+    picker1Range: ['人民币', '美元', '欧元', '日元'],
+    picker2Value: 0,
+    picker2Range: ['木材类', '医药类', '电器类', '文体类'],
+    picker3Value: 0,
+    picker3Range: ['陆运', '海运', '空运', '邮包', '铁路'],
+    picker4Value: 0,
+    picker4Range: ['北京', '上海', '广州', '深圳'],
+    picker5Value: 0,
+    picker5Range: ['北京', '上海', '广州', '深圳'],
+    picker6Value: 0,
+    picker6Range: ['国内水陆综合险', '国内水陆基本险'],
     timeValue: '08:08',
     dateValue: '请选择您的起运日期',
   },
   normalPickerBindchange: function (e) {
     this.setData({
       picker1Value: e.detail.value
-    })
-  },
-  timePickerBindchange: function (e) {
-    this.setData({
-      timeValue: e.detail.value
     })
   },
   datePickerBindchange: function (e) {

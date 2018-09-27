@@ -19,3 +19,15 @@
 .usermotto {
   margin-top: 200px;
 }
+
+.page_hd {
+  background-color: whitesmoke;
+  height: 39px;
+}
+.page_hd_ch {
+  height: 38px;
+  color: white;
+  font-size: 15px;
+  border-radius: 0;
+  
+}

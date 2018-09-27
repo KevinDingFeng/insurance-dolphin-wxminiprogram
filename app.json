@@ -1,8 +1,10 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/order/writeOrder"
+    "pages/order/writeOrder",
+   
+    "pages/logs/logs"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

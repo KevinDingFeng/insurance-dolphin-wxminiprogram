@@ -1,12 +1,8 @@
 <!--index.wxml-->
 <view class="container">
-    <view class="header-top"style="margin-top:{{(scale<0.55)? '0rpx':'-104rpx'}};margin-bottom:{{(scale<0.55)? '236rpx':'170rpx'}};">
-           
-        </view>
-        <button class='btn-fq ' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="my_fq">
-            下单
-        </button>
-        <view class='bottom-logo' >
-           
-        </view>
+  <view class="page_hd" style="position:fixed; bottom:0;width: 750rpx;">
+      <button class=".page_hd_ch" style="position:fixed; bottom:0;background-color: rgb(0, 153, 255);width:100%;" open-type="getUserInfo" bindgetuserinfo="my_fq">
+       填写投保单
+      </button>
+  </view>
 </view>
