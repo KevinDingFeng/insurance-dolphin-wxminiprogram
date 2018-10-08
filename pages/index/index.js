@@ -10,6 +10,8 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     pageStyle: `width:${app.globalData.width};height:${app.globalData.height}`,
     scale: app.globalData.windowWidth / app.globalData.windowHeight,
+    foreignPrice:'20',
+    innerPrice:'10',
   },
   //事件处理函数
   bindViewTap: function () {
@@ -17,32 +19,18 @@ Page({
       url: '/pages/logs/logs'
     })
   },
-  my_to: function (e) {
-    var _this = this;
-    if (e.detail.errMsg == "getUserInfo:ok") {
-      if (!app.globalData.userInfo || !wx.getStorageSync('userId')) {
-        //获取用户数据
-        app.login();
-      }
-      wx.redirectTo({
-        url: '/pages/myWriting/myWriting',
-      })
-    }
+  //跳转至保险详情说明页面
+  to_detail_inner: function (e) {
+    wx.navigateTo({
+      url: '/pages/detail/showDetail?price=' + this.data.innerPrice
+    })
   },
-  my_fq: function (e) {
-    // console.log(e.detail.errMsg)
-    // console.log(e.detail.userInfo)
-    // console.log(e.detail.rawData)
-    if (e.detail.errMsg == "getUserInfo:ok") {
-      if (!app.globalData.userInfo || !wx.getStorageSync('userId')) {
-        //获取用户数据
-        app.login();
-      }
-      wx.redirectTo({
-        url: '/pages/order/writeOrder',
-      })
-    }
+  to_detail_foreign: function (e) {
+    wx.navigateTo({
+      url: '/pages/detail/showDetail?price=' + this.data.foreignPrice
+    })
   },
+
   onLoad: function () {
     console.log(app.globalData)
     console.log(this.data.canIUse)
@@ -80,20 +68,5 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  },
-  /**
- * 用户点击右上角分享
- */
-  onShareAppMessage: function (res) {
-    let that = this;
-    let title_ = config.onShareAppMessageTitle[Math.floor(Math.random() * config.onShareAppMessageTitle.length)];
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-    }
-    return {
-      title: title_,
-      path: '/pages/index/index',
-    }
-  },
+  }
 })

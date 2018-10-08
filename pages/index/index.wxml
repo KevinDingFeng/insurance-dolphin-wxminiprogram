@@ -1,8 +1,15 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="page_hd" style="position:fixed; bottom:0;width: 750rpx;">
-      <button class=".page_hd_ch" style="position:fixed; bottom:0;background-color: rgb(0, 153, 255);width:100%;" open-type="getUserInfo" bindgetuserinfo="my_fq">
-       填写投保单
-      </button>
+<view class='bg'>
+  <view style='font-size:13px;color: rgb(172, 170, 170);padding-top:15px'>
+    <text space='nbsp'>     当天支付当即生效       全程理赔服务     太平洋保险品牌保证</text>  
+  </view>
+  <view >
+     <image src="../../images/insurance/index_in.png" style='width:100%;margin-top:7px;height:200px;' bindtap='to_detail_inner'/>
+  </view>
+  <view style=''>
+     <image src="../../images/insurance/index_foreign.png" style='width:50%;height:180px;' bindtap='to_detail_foreign'/>
+  </view>
+  <view class="page_hd">
+       <image src="../../images/insurance/index_page.png " style='width:25%;height:80%;margin-left:40%;margin-top:2%' bindtap='to_detail'/>
   </view>
 </view>

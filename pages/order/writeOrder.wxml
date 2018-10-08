@@ -1,76 +1,51 @@
 <!--pages/order/writeOrder.wxml-->
-<view> 
-  
-  <view class="block" style="height:60px"><text style='color:red'>*</text>
-   被保险人 <input placeholder="请输入货主或货物得直接收益" maxlength="5" type="tel" bindinput="getInput" class='_input'/>  
-    <text space="ensp">\n 证件号</text>  <input placeholder="货主身份证或营业执照" maxlength="11" type="tel" bindinput="getInput" class='_input'/>  
+<view class='bg order_bg'> 
+   <view>
+      <image src="../../images/insurance/order_top.png" style='height:50px;width:100%;margin-top:5px' />
   </view>
-  <view class="block" style="height:60px">
-     <text space="nbsp"> 投保产品\n\n</text>
-    <text style='color:red'>*</text>货物价值
-    <input placeholder="请输入货物金额" maxlength="11" type="tel" bindinput="getInput" class='_input'/>
-    <picker value="{{picker1Value}}" range="{{picker1Range}}" bindchange="normalPickerBindchange" class="_select">
-         {{picker1Range[picker1Value]}}        <image class='down' src='../../images/insurance/down.png' style="height:{{(scale<0.55)? '30rpx':'30rpx'}};"  mode="aspectFit"></image>
+  <view class='message'>
+    <text>被保人姓名\n</text>
+    <input placeholder="请填写本人身份信息，不可更改" bindinput ="userNameInput" class='_input' />
+    <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
+    <text>身份证号\n</text>
+    <input bindinput="userIdInput" bindblur='checkuserId' maxlength='18' class='_input'/>
+    <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
+    <text>航班日期\n</text>
+     <picker mode="date" value="{{flightDate}}" start="{{start}}" end="2999-12-12" bindchange="datePickerBindchange" bindtouchend='checkDate' class="_date">
+        <view>
+          <text style='position:relative;bottom:7px;'> {{flightDate}} </text> 
+          <image src="../../images/insurance/down.png" style='height:20px;width:30px;position:relative;left:200px'></image>
+        </view>
+       
     </picker>
-
-
-
-  </view>
-  <view class="block" style="height:190px">
-    <text style='color:red'>*</text>货物名称
-    <textarea maxlength="120" type="string" bindinput="getInput" class='_textarea'></textarea> 
-    <text style='color:red'>*</text>货物包装及数量
-     <textarea maxlength="120" type="string" bindinput="getInput" class='_textarea'></textarea> 
-    <text style='color:red'>*</text>货物种类
-    <picker value="{{picker2Value}}" range="{{picker2Range}}" bindchange="normalPickerBindchange(picker2Value)" class="_selectleft">
-         {{picker2Range[picker2Value]}}
-          <image class='down' src='../../images/insurance/down.png' style="height:{{(scale<0.55)? '30rpx':'30rpx'}};"  mode="aspectFit"></image>
-    </picker>
-
-  </view>
-  <view class="block" style="height:92px">
-    <text space="ensp"> 运单号</text>
-  <input placeholder="请输入运单号" maxlength="11" type="tel" bindinput="getInput" class='_input'/>  
-     <text style='color:red'>\n*</text>运输方式
-    <picker value="{{picker3Value}}" range="{{picker3Range}}" bindchange="normalPickerBindchange" class="_selectleft">
-         {{picker3Range[picker3Value]}}        <image class='down' src='../../images/insurance/down.png' style="height:{{(scale<0.55)? '30rpx':'30rpx'}};"  mode="aspectFit"></image>
-    </picker>
-    <text space="nbsp"> 车牌号</text>
-  <input placeholder="请填写您的车牌号" maxlength="11" type="tel" bindinput="getInput" class='_input'/>  
-  </view>
-  <view class="block" style="height:180px">
-    <text style='color:red'>*</text><text>起运日期\n</text>
-    <picker mode="date" value="{{dateValue}}" start="1999-01-01" end="2999-12-12" bindchange="datePickerBindchange" class="_date">             {{dateValue}}
-    </picker>
-
-    <text space="ensp">\n 起运地</text>
-     <picker value="{{picker4Value}}" range="{{picker4Range}}" bindchange="normalPickerBindchange" class="_selectleft">
-         {{picker4Range[picker4Value]}}         <image class='down' src='../../images/insurance/down.png' style="height:{{(scale<0.55)? '30rpx':'30rpx'}};"  mode="aspectFit"></image>
-    </picker>
-    <input placeholder="请输入详细地址" maxlength="11" type="tel" bindinput="getInput" class="address_input"/>  
-    <text space="ensp"> 中转地</text>
-    <input placeholder="中转地" maxlength="11" type="tel" bindinput="getInput" class='_input'/> 
-    <text space="ensp">\n 目得地</text>
-     <picker value="{{picker5Value}}" range="{{picker5Range}}" bindchange="normalPickerBindchange" class="_selectleft">
-         {{picker5Range[picker5Value]}}        <image class='down' src='../../images/insurance/down.png' style="height:{{(scale<0.55)? '30rpx':'30rpx'}};"  mode="aspectFit"></image>
-    </picker>
-    <input placeholder="请输入详细地址" maxlength="11" type="tel" bindinput="getInput" class="address_input"/>  
-  </view>
-  <view class="block" style="height:450px">
-    <text style='color:red'>*</text><text>主险险种\n\n</text>
-     <picker value="{{picker6Value}}" range="{{picker6Range}}" bindchange="normalPickerBindchange" class="_selectleft" style="margin-top:-33px">
-         {{picker6Range[picker6Value]}}        <image class='down' src='../../images/insurance/down.png' style="height:{{(scale<0.55)? '30rpx':'30rpx'}};margin-left:65px;"  mode="aspectFit"></image>
-    </picker>
-    <text space="nbsp">  特别约定</text>  
-    <textarea maxlength="120" type="string" bindinput="getInput" class="_textarea" id="specil_textarea"></textarea> 
+    <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
+    <text>航班号</text>
+    <input maxlength='6' bindinput="flightNoInput" class='_input' bindblur='getCity'/>
+  <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
+    <text>起点</text>
+    <input bindinput="getInput" class='_input' value='{{depCity}}'/>
+    <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
+    <text>终点</text>
+    <input bindinput="getInput" class='_input' value='{{arrCity}}'/>
   </view>
 
-  <view class="page_hd" style="position:fixed; bottom:0;width: 750rpx;">
-      <button class=".page_hd_ch" style="position:fixed; bottom:0;background-color: rgb(0, 153, 255);width: 90px;margin-left:210px;">
-       信息暂存
-      </button>
-      <button class=".page_hd_ch" style="position:fixed; bottom:0;background-color: rgb(0, 100, 255);width: 90px;margin-left: 300px;padding-right: 28px;">
-       支付
-      </button>
+   <view class='message' >
+    <text>手机号\n</text>
+    <input placeholder="用于接收订单相关信息" maxlength='11' bindinput="telNumberInput" bindblur='blurPhone' class='_input' style='width:180px'/>
+  </view>
+  <image src="../../images/insurance/yes.png" style='height:30px;width:30px;margin-bottom:9px;margin-left:10px;'></image>
+    <view style='margin-top:-37px;margin-left:43px;height:120px'>
+    我同意
+    <text style='color:rgba(18, 194, 97, 0.774)'>《投保须知》</text>  和
+    <text style='color:rgba(18, 194, 97, 0.774)'>《保险适用条款》</text> 
+    </view>
+
+
+  <view class="page_hd">
+    <view style='position:fixed;margin-left:100px;margin-top:10px;font-size:25px;color:rgba(18, 194, 97, 0.774);'>{{total_fee}}</view>   
+
+       <button class="page_hd_ch" style="position:fixed;right:10px;bottom:0px;background-color: rgba(18, 194, 97, 0.774);width:35%;margin-bottom:10px;" open-type="getUserInfo" bindtap='pay'>
+        立即投保
+        </button>
   </view>
 </view>

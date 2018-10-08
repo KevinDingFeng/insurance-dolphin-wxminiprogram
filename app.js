@@ -35,7 +35,6 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -147,9 +146,11 @@ App({
                 if (res.data.success) {
                   _this.globalData.token = res.data.data.accessToken;
                   _this.globalData.userId = res.data.data.userId;
+                  _this.globalData.openId = res.data.data.openId;
                   try {
                     wx.setStorageSync('accessToken', res.data.data.accessToken);
                     wx.setStorageSync('userId', res.data.data.userId);
+                    wx.setStorageSync('openId', res.data.data.openId);
                   } catch (e) {
                   }
                   _this.login();
@@ -175,7 +176,8 @@ App({
     fullScreen: false,
     songlist: [],
     playing: false,
-    innerAudioContext: null
+    innerAudioContext: null,
+    openId: null,
   },
   onShow: function () {
 

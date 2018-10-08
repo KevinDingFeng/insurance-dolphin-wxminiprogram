@@ -1,44 +1,17 @@
 /* pages/order/writeOrder.wxss */
-.block {
-  color: black;
-  border: 1px solid;
-  border-color: rgba(0, 162, 255, 0.788);
-  margin-top: 10px;
-  margin-left: 5px;
-  font-size: 13px;
-  padding: 13px;
-  width: 90%;
+.order_bg {
+  font-size: 15px;
 }
 ._input {
-  width: 180px;
-  margin-top: -21px;
-  margin-left: 90px;
+  width: 250px;
+  margin-top: -20px;
+  margin-left: 95px;
+  font-size: 14px;
 }
-._textarea {
-  border: 1px solid;
-  border-color:rgba(0, 162, 255, 0.788);
-  height: 40px;
-  margin-top: 5px;
+.message {
+  background-color: white;
   margin-bottom: 5px;
-  padding: 10px;
-  width: 94%;
-}
-.address_input {
-  margin-left: 90px;
-  margin-bottom: 10px;
-  margin-top: -10px;
-}
-#specil_textarea {
-  height: 380px;
-}
-._select {
-  margin-left: 230px;
-  margin-top: -23px;
-}
-._selectleft {
- margin-left: 92px;
- margin-top: -18px;
-
+  padding: 15px;
 }
 .down {
   position: relative;
@@ -49,14 +22,10 @@
   margin-left: 90px;
   margin-top: -17px;
 }
-.page_hd {
-  background-color: whitesmoke;
-  height: 39px;
-}
+
 .page_hd_ch {
   height: 38px;
   color: white;
   font-size: 15px;
-  border-radius: 0;
-  
+  border-radius: 2px; 
 }

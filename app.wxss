@@ -8,3 +8,15 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+.bg {
+  background-color: rgba(248, 246, 246, 0.993);
+  height:700px;
+}
+.page_hd {
+  background-color: white;
+  height: 55px;
+  position:fixed; 
+  bottom:0;
+  width: 750rpx;
+  z-index: 5;
+}

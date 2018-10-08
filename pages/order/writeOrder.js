@@ -1,46 +1,167 @@
 // pages/order/writeOrder.js
+const app = getApp()
+var config = require('../../utils/config.js');
+var util = require('../../utils/util.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    // text:"这是一个页面"
-    picker1Value: 0,
-    picker1Range: ['人民币', '美元', '欧元', '日元'],
-    picker2Value: 0,
-    picker2Range: ['木材类', '医药类', '电器类', '文体类'],
-    picker3Value: 0,
-    picker3Range: ['陆运', '海运', '空运', '邮包', '铁路'],
-    picker4Value: 0,
-    picker4Range: ['北京', '上海', '广州', '深圳'],
-    picker5Value: 0,
-    picker5Range: ['北京', '上海', '广州', '深圳'],
-    picker6Value: 0,
-    picker6Range: ['国内水陆综合险', '国内水陆基本险'],
-    timeValue: '08:08',
-    dateValue: '请选择您的起运日期',
+    //用户信息
+    userInfo: {},
+    openId: null,
+    payInfo: {},
+    //当前日期
+    start: '',
+    //用户输入下单信息
+    userName: '',
+    userId:'',
+    flightNo:'',
+    flightDate: '',
+    depCity:'',
+    arrCity:'',
+    telNumber:'',
+    flag:'true',
+    //保险价格
+    total_fee:'',
   },
-  normalPickerBindchange: function (e) {
+  //获取用户输入的被保人姓名
+  userNameInput: function (e) {
     this.setData({
-      picker1Value: e.detail.value
+      userName: e.detail.value
     })
   },
+  //获取用户输入的身份证号
+  userIdInput: function (e) {
+    this.setData({
+      userId: e.detail.value
+    }) 
+  },
+
+  //获取用户输入的航班日期
   datePickerBindchange: function (e) {
     this.setData({
-      dateValue: e.detail.value
+      flightDate: e.detail.value
     })
   },
-  bindShowMsg() {
-    if (this.data.select == false) {
-      this.setData({ select: true })
-    } else {
-      this.setData({ select: false })
-    }
+  checkDate: function (e) {
+    var time = util.formatTime(new Date());
+    console.log(time);
   },
-  mySelect(e) {
-    var name = e.currentTarget.dataset.name
-    this.setData({ tihuoWay: name, select: false })
+  //获取用户输入的航班号
+  flightNoInput: function (e) {
+    this.setData({
+      flightNo: e.detail.value
+    })
+  },
+  //输入航班号获取起点和终点信息
+  getCity: function (e) {
+    let that = this;
+    wx.request({
+      url: config.baseUrl + '/customer/flight',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: { 'flightNo': that.data.flightNo, 'flightDate': that.data.flightDate },
+      success: function (res) {
+        console.log(res.data.data.depCity);
+        that.setData({
+          depCity: res.data.data.depCity,
+          arrCity: res.data.data.arrCity
+        })
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '输入的航班号有误！',
+          icon: 'none',
+          duration: 1500
+        })
+      }
+
+    })
+  },
+  //获取用户输入的手机号
+  telNumberInput: function (e) {
+    this.setData({
+      telNumber: e.detail.value
+    })
+  },
+  // 表单手机号验证
+  blurPhone: function (e) {
+    var that = this;
+    var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+    if (!myreg.test(e.detail.value)) {
+      wx.showToast({ 
+        title: '手机号有误！', 
+        icon: 'none', 
+        duration: 1500 })
+      this.setData({
+        flag: false
+      })
+    }else{
+      this.setData({
+        flag: true
+      })
+    } 
+  },
+
+
+  //点击支付按钮，获取openId，将openId传给下单方法
+  pay: function (event) {
+    
+
+    var that = this;
+    if (this.data.userName.length == 0 || this.data.userId.length == 0 || 
+        this.data.flightNo.length == 0 || this.data.flightDate.length == 0 || 
+        this.data.depCity.length == 0 || this.data.arrCity.length == 0 || 
+      this.data.telNumber.length == 0 || this.data.telNumber == 'false'){
+       wx.showToast({ title: '请完善表单信息！', icon: 'none', duration: 1500 }) 
+    }else{
+      if (app.globalData.openId != null) {
+        this.order(app.globalData.openId);
+      } else {
+        app.login();
+      }
+    }
+      
+  },
+
+  //下单
+  order: function (openId) {
+    console.log('下单');
+    var that = this;
+    wx.request({
+      url: config.baseUrl + '/pay/order',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {'openId': openId, 'total_fee': price,'userName': userName, 
+             'userId': userId, 'flightNo': flightNo, 'flightDate': flightDate, 
+             'depCity': depCity, 'arrCity': arrCity, 'telNumber': telNumber
+      },
+      success: function (res) {
+        that.requestPayment(res.data);
+      }
+    })
+  },
+ 
+  //申请支付
+  requestPayment: function (obj) {
+    console.log(obj);
+    wx.requestPayment({
+      'timeStamp': obj.data.timeStamp,
+      'nonceStr': obj.data.nonceStr,
+      'package': obj.data.package,
+      'signType': obj.data.signType,
+      'paySign': obj.data.paySign,
+      'success': function (res) {
+        console.log('支付成功');
+      },
+      'fail': function (res) {
+        console.log('支付失败');
+      }
+    })
   },
 
 
@@ -48,7 +169,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    var _date = util.formatDate(new Date());
+    that.setData({
+      start: _date
+    })
+    that.setData({
+      total_fee: options.price,
+    })
+    console.log(this.data.total_fee);
   },
 
   /**

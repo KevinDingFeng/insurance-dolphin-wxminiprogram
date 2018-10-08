@@ -1,15 +1,18 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/detail/showDetail",
+
     "pages/order/writeOrder",
-   
+
     "pages/logs/logs"
     
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "飞行行李险",
     "navigationBarTextStyle": "black"
   }
+
 }
