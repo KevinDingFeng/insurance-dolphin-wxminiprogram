@@ -8,20 +8,20 @@ Page({
    */
   data: {
     price:'',
+    classtype:'',
   },
 
   //跳转至下保单页面
   to_insured: function (e) { 
-    // console.log(e.detail.errMsg)
-    // console.log(e.detail.userInfo)
-    // console.log(e.detail.rawData)
     if (e.detail.errMsg == "getUserInfo:ok") {
       if (!app.globalData.userInfo || !wx.getStorageSync('userId')) {
+       console.log('进入下单页面');
+       console.log(app.globalData.userInfo);
         //获取用户数据
         app.login();
       }
       wx.navigateTo({
-        url: '/pages/order/writeOrder?price='+this.data.price
+        url: '/pages/order/writeOrder?price=' + this.data.price + '&classtype=' + this.data.classtype
       })
     }
   },
@@ -33,7 +33,11 @@ Page({
     var that = this;
     that.setData({
       price: options.price,
-    })
+    }),
+      that.setData({
+        classtype: options.classtype,
+      })
+      console.log(that.data.classtype);
   },
 
   /**

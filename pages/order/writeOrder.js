@@ -10,7 +10,6 @@ Page({
   data: {
     //用户信息
     userInfo: {},
-    openId: null,
     payInfo: {},
     //当前日期
     start: '',
@@ -22,9 +21,12 @@ Page({
     depCity:'',
     arrCity:'',
     telNumber:'',
+    markNumber:'',
     flag:'true',
     //保险价格
     total_fee:'',
+    //国内还是国外
+    classtype:'',
   },
   //获取用户输入的被保人姓名
   userNameInput: function (e) {
@@ -81,6 +83,12 @@ Page({
 
     })
   },
+  //获取用户输入的行李牌号码
+  markInput: function (e) {
+    this.setData({
+      markNumber: e.detail.value
+    })
+  },
   //获取用户输入的手机号
   telNumberInput: function (e) {
     this.setData({
@@ -108,37 +116,57 @@ Page({
 
 
   //点击支付按钮，获取openId，将openId传给下单方法
-  pay: function (event) {
-    
+  paycheck: function (event) {
 
     var that = this;
-    if (this.data.userName.length == 0 || this.data.userId.length == 0 || 
-        this.data.flightNo.length == 0 || this.data.flightDate.length == 0 || 
-        this.data.depCity.length == 0 || this.data.arrCity.length == 0 || 
-      this.data.telNumber.length == 0 || this.data.telNumber == 'false'){
+    console.log(that.data.classtype);
+    if (that.data.userName.length == 0 || that.data.userId.length == 0 || 
+        that.data.flightNo.length == 0 || that.data.flightDate.length == 0 || 
+        that.data.depCity.length == 0 || that.data.arrCity.length == 0 || 
+      that.data.telNumber.length == 0 || that.data.telNumber == 'false'){
        wx.showToast({ title: '请完善表单信息！', icon: 'none', duration: 1500 }) 
     }else{
-      if (app.globalData.openId != null) {
-        this.order(app.globalData.openId);
-      } else {
-        app.login();
-      }
+      that.pay(event);
     }
       
   },
-
-  //下单
-  order: function (openId) {
-    console.log('下单');
+  //点击支付按钮，获取openId，将openId传给下单方法
+  pay: function (event) {
     var that = this;
+    if (app.globalData.openId != null) {
+      that.order(app.globalData.openId);
+    } else {
+      app.login();
+    }
+  },
+
+
+  //下单'APPLYNAME': that.data.userName, 
+ // 'APPLYNAME': that.data.userName, 'INSURANCECARDCODE': that.data.userId,
+ // 'VOYNO': that.data.flightNo, 'EFFECTDATE': that.data.flightDate,
+ // 'STARTPORT': that.data.depCity, 'ENDPORT': that.data.arrCity,
+
+  order: function (openId) {
+    console.log(openId);
+    var that = this;
+    console.log(that.data.classtype);
     wx.request({
       url: config.baseUrl + '/pay/order',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      data: {'openId': openId, 'total_fee': price,'userName': userName, 
-             'userId': userId, 'flightNo': flightNo, 'flightDate': flightDate, 
-             'depCity': depCity, 'arrCity': arrCity, 'telNumber': telNumber
+      data: {
+        'openid': openId, 
+        'applyname':that.data.userName,
+        'applycardcode':that.data.userId,
+        'saildate':that.data.flightDate,
+        'voyno':that.data.flightNo,
+        'startport':that.data.depCity,
+        'endport':that.data.arrCity,
+        'mark': that.data.markNumber,
+        'amount': that.data.total_fee, 
+        'insuranttel': that.data.telNumber,
+        'classestype': that.data.classtype,
       },
       success: function (res) {
         that.requestPayment(res.data);
@@ -149,6 +177,7 @@ Page({
   //申请支付
   requestPayment: function (obj) {
     console.log(obj);
+    var that = this;
     wx.requestPayment({
       'timeStamp': obj.data.timeStamp,
       'nonceStr': obj.data.nonceStr,
@@ -164,20 +193,22 @@ Page({
     })
   },
 
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+   
     var that = this;
+ 
     var _date = util.formatDate(new Date());
     that.setData({
       start: _date
     })
     that.setData({
       total_fee: options.price,
+      classtype: options.classtype,
     })
-    console.log(this.data.total_fee);
+    console.log(this.data.classtype);
   },
 
   /**

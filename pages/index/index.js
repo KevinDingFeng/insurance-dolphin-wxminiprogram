@@ -10,8 +10,10 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     pageStyle: `width:${app.globalData.width};height:${app.globalData.height}`,
     scale: app.globalData.windowWidth / app.globalData.windowHeight,
-    foreignPrice:'20',
-    innerPrice:'10',
+    foreignPrice:'2000',
+    foreignType:'2',
+    innerPrice:'1000',
+    innerType:'1',
   },
   //事件处理函数
   bindViewTap: function () {
@@ -22,12 +24,12 @@ Page({
   //跳转至保险详情说明页面
   to_detail_inner: function (e) {
     wx.navigateTo({
-      url: '/pages/detail/showDetail?price=' + this.data.innerPrice
+      url: '/pages/detail/showDetail?price=' + this.data.innerPrice+'&classtype='+this.data.innerType
     })
   },
   to_detail_foreign: function (e) {
     wx.navigateTo({
-      url: '/pages/detail/showDetail?price=' + this.data.foreignPrice
+      url: '/pages/detail/showDetail?price=' + this.data.foreignPrice + '&classtype=' + this.data.foreignType
     })
   },
 
