@@ -15,7 +15,7 @@
 
 
   <view class="page_hd">
-         <view style='position:fixed;margin-left:100px;margin-top:10px;font-size:25px;color:rgba(18, 194, 97, 0.774);'>{{price}}</view>   
+         <view style='position:fixed;margin-left:100px;margin-top:10px;font-size:25px;color:rgba(18, 194, 97, 0.774);'> {{price*0.01}}￥</view>   
         <button class="page_hd_ch" style="position:fixed;right:10px;bottom:0px;background-color: rgba(18, 194, 97, 0.774);width:35%;margin-bottom:10px;" open-type="getUserInfo" bindgetuserinfo='to_insured'>
         立即投保
         </button>

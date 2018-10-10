@@ -141,10 +141,7 @@ Page({
   },
 
 
-  //下单'APPLYNAME': that.data.userName, 
- // 'APPLYNAME': that.data.userName, 'INSURANCECARDCODE': that.data.userId,
- // 'VOYNO': that.data.flightNo, 'EFFECTDATE': that.data.flightDate,
- // 'STARTPORT': that.data.depCity, 'ENDPORT': that.data.arrCity,
+  //下单
 
   order: function (openId) {
     console.log(openId);
@@ -186,6 +183,9 @@ Page({
       'paySign': obj.data.paySign,
       'success': function (res) {
         console.log('支付成功');
+        wx.navigateTo({
+          url: '/pages/success/success'
+        })
       },
       'fail': function (res) {
         console.log('支付失败');
@@ -199,7 +199,6 @@ Page({
   onLoad: function (options) {
    
     var that = this;
- 
     var _date = util.formatDate(new Date());
     that.setData({
       start: _date
@@ -208,7 +207,6 @@ Page({
       total_fee: options.price,
       classtype: options.classtype,
     })
-    console.log(this.data.classtype);
   },
 
   /**

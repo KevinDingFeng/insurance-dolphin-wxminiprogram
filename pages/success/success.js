@@ -1,42 +1,18 @@
-// pages/detail/showDetail.js
-const app = getApp()
-var config = require('../../utils/config.js');
+// pages/success/success.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    price:'',
-    classtype:'',
-  },
 
-  //跳转至下保单页面
-  to_insured: function (e) { 
-    if (e.detail.errMsg == "getUserInfo:ok") {
-      if (!app.globalData.userInfo || !wx.getStorageSync('userId')) {
-       console.log(app.globalData.userInfo);
-        //获取用户数据
-        app.login();
-      }
-      wx.navigateTo({
-        url: '/pages/order/writeOrder?price=' + this.data.price + '&classtype=' + this.data.classtype
-      })
-    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    that.setData({
-      price: options.price,
-    }),
-      that.setData({
-        classtype: options.classtype,
-      })
-      console.log(that.data.classtype);
+
   },
 
   /**

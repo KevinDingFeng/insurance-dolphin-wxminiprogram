@@ -2,10 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/detail/showDetail",
-
     "pages/order/writeOrder",
-
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/success/success"
     
   ],
   "window": {
