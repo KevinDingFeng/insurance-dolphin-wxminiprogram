@@ -23,6 +23,8 @@ Page({
     telNumber:'',
     markNumber:'',
     flag:'true',
+    depCityCode:'',
+    arrCityCode:'',
     //保险价格
     total_fee:'',
     //国内还是国外
@@ -83,10 +85,73 @@ Page({
 
     })
   },
+  //扫描获取航班号和城市的起点和终点
+  scanFlight: function () {
+    var that = this;
+    console.log("进入扫描");
+    wx.scanCode({
+      scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
+      success: function (res) {
+        that.setData({
+          passResult: res.result,
+        })
+        console.log(that.data.passResult);
+        var dateList = that.data.passResult.split(" ");
+        var arr = [];
+        for (var i in dateList) {
+          if (dateList[i].length != 0) {
+            arr = arr.concat(dateList[i]);
+            console.log(arr);
+          }
+        }
+        var flight = arr[2] + arr[3];
+        var startCity = arr[2].substring(0, 3);
+        var endCity = arr[2].substring(3, 6);
+        var flightNum = flight.substring(6, 12);
+        that.setData({
+          flightNo: flightNum,
+          depCityCode: startCity,
+          arrCityCode: endCity,
+        })
+        that.scanGetCity();
+      }
+    })
+  },
+  scanGetCity: function(e) {
+    let that = this;
+    wx.request({
+      url: config.baseUrl + '/customer/getFlight',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: { 'depCityCode': that.data.depCityCode, 'arrCityCode': that.data.arrCityCode },
+      success: function (res) {
+        console.log(res);
+        that.setData({
+          depCity: res.data.data.depCity,
+          arrCity: res.data.data.arrCity
+        })
+      },
+
+    })
+  },
   //获取用户输入的行李牌号码
   markInput: function (e) {
     this.setData({
       markNumber: e.detail.value
+    })
+  },
+  //扫描获取用户输入的行李牌好吗
+  scanPackage: function () {
+    var that = this;
+    wx.scanCode({
+      scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
+      success: function (res) {
+        console.log(res.result);
+        that.setData({
+          markNumber:res.result
+        })
+      }
     })
   },
   //获取用户输入的手机号

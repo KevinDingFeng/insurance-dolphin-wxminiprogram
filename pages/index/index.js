@@ -14,6 +14,8 @@ Page({
     foreignType:'2',
     innerPrice:'1000',
     innerType:'1',
+    //登机牌信息
+    passResult:'',
   },
   //事件处理函数
   bindViewTap: function () {
@@ -30,6 +32,32 @@ Page({
   to_detail_foreign: function (e) {
     wx.navigateTo({
       url: '/pages/detail/showDetail?price=' + this.data.foreignPrice + '&classtype=' + this.data.foreignType
+    })
+  },
+  //扫描
+  scan: function () {
+    var that = this;
+    console.log("进入扫描");
+    wx.scanCode({
+      scanType: ['qrCode', 'barCode', 'datamatrix','pdf417'],
+     success: function(res){
+       that.setData({
+         passResult: res.result,
+       })
+       console.log(that.data.passResult);
+       var dateList = that.data.passResult.split(" ");
+       var arr = []
+       for (var i in dateList) {
+         if (dateList[i].length!=0){
+           arr = arr.concat(dateList[i]);
+           console.log(arr);
+      }
+       }
+       var flight = arr[2] + arr[3];
+       var startCity = arr[2].substring(0, 3);
+       var endCity = arr[2].substring(3,6);
+       var flightNo = flight.substring(6, 12);
+     }
     })
   },
 

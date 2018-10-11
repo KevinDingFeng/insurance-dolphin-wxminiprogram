@@ -20,7 +20,9 @@
     </picker>
     <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
     <text>航班号</text>
-    <input maxlength='6' bindinput="flightNoInput" class='_input' bindblur='getCity'/>
+    <input maxlength='6' bindinput="flightNoInput" class='_input' value='{{flightNo}}' bindblur='getCity'/>
+        <image src="../../images/insurance/scan.png" style='height:25px;width:25px;margin-left:280px;z-index:10' bindtap='scanFlight'></image>
+
   <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
     <text>起点</text>
     <input bindinput="getInput" class='_input' value='{{depCity}}'/>
@@ -29,7 +31,8 @@
     <input bindinput="getInput" class='_input' value='{{arrCity}}'/>
      <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
     <text>行李牌号码</text>
-    <input bindinput="markInput" class='_input'/>
+    <input bindinput="markInput" class='_input' value='{{markNumber}}'/>
+    <image src="../../images/insurance/scan.png" style='height:25px;width:25px;margin-left:280px;z-index:10' bindtap='scanPackage'></image>
   </view>
 
    <view class='message' >
