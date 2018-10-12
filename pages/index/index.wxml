@@ -9,7 +9,6 @@
   <view style=''>
      <image src="../../images/insurance/index_foreign.png" style='width:50%;height:180px;' bindtap='to_detail_foreign'/>
   </view>
-  <button bindtap='scan'>扫描</button>
   <view class="page_hd">
        <image src="../../images/insurance/index_page.png " style='width:25%;height:80%;margin-left:40%;margin-top:2%' bindtap='to_detail'/>
   </view>

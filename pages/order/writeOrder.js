@@ -34,19 +34,12 @@ Page({
     total_fee:'',
     //国内还是国外
     classtype:'',
+    //行李个数
+    packNum:1,
+    //页面显示价格
+    showPrice: '',
   },
-  //获取用户输入的被保人姓名
-  userNameInput: function (e) {
-    this.setData({
-      userName: e.detail.value
-    })
-  },
-  //获取用户输入的身份证号
-  userIdInput: function (e) {
-    this.setData({
-      userId: e.detail.value
-    }) 
-  },
+
 
   //获取用户输入的航班日期
   datePickerBindchange: function (e) {
@@ -58,12 +51,20 @@ Page({
     var time = util.formatTime(new Date());
     console.log(time);
   },
-  //获取用户输入的航班号
-  flightNoInput: function (e) {
+  //获取用户输入的起点和终点信息
+ 
+  startInput: function (e) {
     this.setData({
-      flightNo: e.detail.value
+      depCity: e.detail.value
     })
   },
+
+  endInput: function (e) {
+    this.setData({
+      arrCity: e.detail.value
+    })
+  },
+ 
   //输入航班号获取起点和终点信息
   getCity: function (e) {
     let that = this;
@@ -141,31 +142,20 @@ Page({
 
     })
   },
-  //手动输入起点
-  getInputStart: function (e) {
-    this.setData({
-      depCity: e.detail.value
-    })
-  },
-  //获取用户输入终点
-  getInputEnd: function (e) {
-    this.setData({
-      arrCity: e.detail.value
-    })
-  },
+
   //获取价格
   getPrice: function (e) {
+    var that = this;
+    console.log(that.data.depCityCode);
     wx.request({
       url: config.baseUrl + '/customer/getFlight',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      data: { 'depCityCode': that.data.depCityCode, 'arrCityCode': that.data.arrCityCode, 'cityType': that.data.classtype },
+      data: { 'depCity': that.data.depCity, 'arrCity': that.data.arrCity},
       success: function (res) {
         console.log(res);
         that.setData({
-          depCity: res.data.data.depCity,
-          arrCity: res.data.data.arrCity,
           total_fee: res.data.data.total_fee,
         })
         console.log(that.data.total_fee);
@@ -183,7 +173,10 @@ Page({
         console.log(res.result);
         that.setData({
           pack1 : res.result,
+          packNum: that.data.packNum+1,
+          showPrice: that.data.packNum*that.data.total_fee,
         })
+        console.log(that.data.packNum)
       }
     })
   },
@@ -195,6 +188,8 @@ Page({
         console.log(res.result);
         that.setData({
           pack2: res.result,
+          packNum: that.data.packNum + 1,
+          showPrice: that.data.packNum * that.data.total_fee,
         })
       }
     })
@@ -207,6 +202,8 @@ Page({
         console.log(res.result);
         that.setData({
           pack3: res.result,
+          packNum: that.data.packNum + 1,
+          showPrice: that.data.packNum * that.data.total_fee,
         })
       }
     })
@@ -219,6 +216,8 @@ Page({
         console.log(res.result);
         that.setData({
           pack4: res.result,
+          packNum: that.data.packNum + 1,
+          showPrice: that.data.packNum * that.data.total_fee,
         })
       }
     })
@@ -231,6 +230,8 @@ Page({
         console.log(res.result);
         that.setData({
           pack5: res.result,
+          packNum: that.data.packNum + 1,
+          showPrice: that.data.packNum * that.data.total_fee,
         })
       }
     })
@@ -260,22 +261,6 @@ Page({
     } 
   },
 
-
-  //点击支付按钮，获取openId，将openId传给下单方法
-  paycheck: function (event) {
-
-    var that = this;
-    console.log(that.data.classtype);
-    if (that.data.userName.length == 0 || that.data.userId.length == 0 || 
-        that.data.flightNo.length == 0 || that.data.flightDate.length == 0 || 
-        that.data.depCity.length == 0 || that.data.arrCity.length == 0 || 
-      that.data.telNumber.length == 0 || that.data.telNumber == 'false'){
-       wx.showToast({ title: '请完善表单信息！', icon: 'none', duration: 1500 }) 
-    }else{
-      that.pay(event);
-    }
-      
-  },
   //点击支付按钮，获取openId，将openId传给下单方法
   pay: function (event) {
     var that = this;
@@ -349,13 +334,35 @@ Page({
 
   formSubmit: function (e) {
     var that = this;
+    console.log(e.detail.value);
     that.setData({
-      'markNumber[0].mark': that.data.pack1,
-      'markNumber[1].mark': that.data.pack2,
-      'markNumber[2].mark': that.data.pack3,
-      'markNumber[3].mark': that.data.pack4,
-      'markNumber[4].mark': that.data.pack5,
+      'markNumber[0].mark': e.detail.value.mark1,
+      'markNumber[1].mark': e.detail.value.mark2,
+      'markNumber[2].mark': e.detail.value.mark3,
+      'markNumber[3].mark': e.detail.value.mark4,
+      'markNumber[4].mark': e.detail.value.mark5,
+      userName: e.detail.value.userName,
+      userId: e.detail.value.userId,
+      flightDate: e.detail.value.flightDate,
+      flightNo: e.detail.value.flightNo,
+      depCity: e.detail.value.depCity,
+      arrCity: e.detail.value.arrCity,
+      
     })
+    console.log(that.data.arrCity.length);
+    if (e.detail.value.length == 0 || e.detail.value.length == 0 ||
+      that.data.flightNo.length == 0 || that.data.flightDate.length == 0 ||
+      that.data.depCity.length == 0 || that.data.arrCity.length == 0 ||
+      that.data.telNumber.length == 0 || that.data.flag == 'false') {
+      wx.showToast({ title: '请完善表单信息！', icon: 'none', duration: 1500 })
+    } else {
+      if (app.globalData.openId != null) {
+        that.order(app.globalData.openId);
+      } else {
+        app.login();
+      }
+    }
+
     console.log(that.data.markNumber);
   },
   /**
@@ -370,6 +377,7 @@ Page({
     })
     that.setData({
       total_fee: options.price,
+      showPrice: options.price,      
       classtype: options.classtype,
     })
   },
