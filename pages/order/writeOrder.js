@@ -21,7 +21,12 @@ Page({
     depCity:'',
     arrCity:'',
     telNumber:'',
-    markNumber:'',
+    markNumber:[],
+    pack1:'',
+    pack2:'',
+    pack3:'',
+    pack4:'',
+    pack5:'',
     flag:'true',
     depCityCode:'',
     arrCityCode:'',
@@ -124,32 +129,108 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      data: { 'depCityCode': that.data.depCityCode, 'arrCityCode': that.data.arrCityCode },
+      data: { 'depCityCode': that.data.depCityCode, 'arrCityCode': that.data.arrCityCode, 'cityType': that.data.classtype },
       success: function (res) {
         console.log(res);
         that.setData({
           depCity: res.data.data.depCity,
-          arrCity: res.data.data.arrCity
+          arrCity: res.data.data.arrCity,
+         // total_fee: res.data.data.total_fee,
         })
       },
 
     })
   },
-  //获取用户输入的行李牌号码
-  markInput: function (e) {
+  //手动输入起点
+  getInputStart: function (e) {
     this.setData({
-      markNumber: e.detail.value
+      depCity: e.detail.value
     })
   },
-  //扫描获取用户输入的行李牌好吗
-  scanPackage: function () {
+  //获取用户输入终点
+  getInputEnd: function (e) {
+    this.setData({
+      arrCity: e.detail.value
+    })
+  },
+  //获取价格
+  getPrice: function (e) {
+    wx.request({
+      url: config.baseUrl + '/customer/getFlight',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: { 'depCityCode': that.data.depCityCode, 'arrCityCode': that.data.arrCityCode, 'cityType': that.data.classtype },
+      success: function (res) {
+        console.log(res);
+        that.setData({
+          depCity: res.data.data.depCity,
+          arrCity: res.data.data.arrCity,
+          total_fee: res.data.data.total_fee,
+        })
+        console.log(that.data.total_fee);
+      },
+     
+
+    })
+  },
+  //扫描获取用户输入的行李牌号码
+  scanPackage1: function (event) {
     var that = this;
     wx.scanCode({
       scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
       success: function (res) {
         console.log(res.result);
         that.setData({
-          markNumber:res.result
+          pack1 : res.result,
+        })
+      }
+    })
+  },
+  scanPackage2: function (event) {
+    var that = this;
+    wx.scanCode({
+      scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
+      success: function (res) {
+        console.log(res.result);
+        that.setData({
+          pack2: res.result,
+        })
+      }
+    })
+  },
+  scanPackage3: function (event) {
+    var that = this;
+    wx.scanCode({
+      scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
+      success: function (res) {
+        console.log(res.result);
+        that.setData({
+          pack3: res.result,
+        })
+      }
+    })
+  },
+  scanPackage4: function (event) {
+    var that = this;
+    wx.scanCode({
+      scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
+      success: function (res) {
+        console.log(res.result);
+        that.setData({
+          pack4: res.result,
+        })
+      }
+    })
+  },
+  scanPackage5: function (event) {
+    var that = this;
+    wx.scanCode({
+      scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
+      success: function (res) {
+        console.log(res.result);
+        that.setData({
+          pack5: res.result,
         })
       }
     })
@@ -225,7 +306,7 @@ Page({
         'voyno':that.data.flightNo,
         'startport':that.data.depCity,
         'endport':that.data.arrCity,
-        'mark': that.data.markNumber,
+        'markString': that.data.markNumber,
         'amount': that.data.total_fee, 
         'insuranttel': that.data.telNumber,
         'classestype': that.data.classtype,
@@ -257,7 +338,26 @@ Page({
       }
     })
   },
+  /**
+   * 投保须知页面跳转
+   */
+  instructions: function() {
+    wx.navigateTo({
+      url: '/pages/instructions/instructions'
+    })
+  },
 
+  formSubmit: function (e) {
+    var that = this;
+    that.setData({
+      'markNumber[0].mark': that.data.pack1,
+      'markNumber[1].mark': that.data.pack2,
+      'markNumber[2].mark': that.data.pack3,
+      'markNumber[3].mark': that.data.pack4,
+      'markNumber[4].mark': that.data.pack5,
+    })
+    console.log(that.data.markNumber);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
