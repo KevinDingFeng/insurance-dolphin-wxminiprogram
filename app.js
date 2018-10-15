@@ -107,6 +107,7 @@ App({
               }
               if (res.data.errorCode == 0) {
                 wx.setStorageSync('userId', res.data.data.userId);
+                wx.setStorageSync('openId', res.data.data.openId);
               }
             }
           })
@@ -175,6 +176,7 @@ App({
     selectsinger: null,//音乐相关
     currentIndex: 0,
     fullScreen: false,
+
   },
   onShow: function () {
 

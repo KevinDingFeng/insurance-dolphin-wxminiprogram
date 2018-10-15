@@ -54,7 +54,6 @@ Page({
   },
   checkDate: function (e) {
     var time = util.formatTime(new Date());
-    console.log(time);
   },
   //获取用户输入的起点和终点信息
 
@@ -112,7 +111,6 @@ Page({
         for (var i in dateList) {
           if (dateList[i].length != 0) {
             arr = arr.concat(dateList[i]);
-            console.log(arr);
           }
         }
         var flight = arr[2] + arr[3];
@@ -151,7 +149,7 @@ Page({
   //获取价格
   getPrice: function (e) {
     var that = this;
-    console.log(that.data.depCityCode);
+    
     wx.request({
       url: config.baseUrl + '/customer/getFlight',
       header: {
@@ -159,11 +157,29 @@ Page({
       },
       data: { 'depCity': that.data.depCity, 'arrCity': that.data.arrCity },
       success: function (res) {
+        var city_class = that.data.classtype;
         console.log(res);
         that.setData({
           total_fee: res.data.data.total_fee,
+          showPrice: res.data.data.total_fee,
+          classtype: res.data.data.classtype
         })
-        console.log(that.data.total_fee);
+        if (city_class != that.data.classtype){
+          console.log('类型不相等');
+          if (that.data.classestype=='1'){
+            wx.showToast({
+              title: '此航班为国内航班，价格为国内航班行李险价格！',
+              icon: 'none',
+              duration: 2000
+            })
+          }else{
+            wx.showToast({
+              title: '此航班为国际航班，价格为国际航班行李险价格！',
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        }
       },
 
 
@@ -306,6 +322,7 @@ Page({
 
   p2blur: function (e) {
     var that = this;
+
     this.setData({
       pack2: e.detail.value
     })
@@ -576,10 +593,10 @@ Page({
       that.data.telNumber.length == 0 || that.data.flag == 'false') {
       wx.showToast({ title: '请完善表单信息！', icon: 'none', duration: 1500 })
     } else {
-      if (app.globalData.openId != null) {
-        that.order(app.globalData.openId);
+      if (wx.getStorageSync('openId')!= null) {
+        that.order(wx.getStorageSync('openId'));
       } else {
-        app.login();
+        console.log('缓存数据中不存在openId');
       }
     }
 
