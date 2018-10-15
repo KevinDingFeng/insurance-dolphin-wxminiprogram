@@ -530,6 +530,7 @@ Page({
         'endport': that.data.arrCity,
         'markString': that.data.markNumber,
         'amount': that.data.showPrice,
+        'premium': that.data.total_fee,
         'insuranttel': that.data.telNumber,
         'classestype': that.data.classtype,
       },

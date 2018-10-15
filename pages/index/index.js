@@ -10,9 +10,9 @@ Page({
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         pageStyle: `width:${app.globalData.width};height:${app.globalData.height}`,
         scale: app.globalData.windowWidth / app.globalData.windowHeight,
-        foreignPrice: '2000',
+        
         foreignType: '2',
-        innerPrice: '1000',
+        
         innerType: '1',
         //登机牌信息
         passResult: '',
@@ -42,7 +42,7 @@ Page({
     },
     to_detail_foreign: function (e) {
         wx.navigateTo({
-            url: '/pages/detail/showDetail?price=' + this.data.foreignPrice + '&classtype=' + this.data.foreignType
+            url: '/pages/detail/showDetail'
         })
     },
     //扫描

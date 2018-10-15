@@ -8,7 +8,10 @@ Page({
      */
     data: {
         price: '',
-        classtype: '',
+        foreignPrice: '2000',
+        innerPrice: '1000',
+        innerclasstype: '',
+        foreignclasstype:'',
         tabs: ["国内", "国际"],
         activeIndex: 0,
         sliderOffset: 0,
@@ -28,7 +31,11 @@ Page({
     tabClick: function (e) {
         this.setData({
             sliderOffset: e.currentTarget.offsetLeft,
-            activeIndex: e.currentTarget.id
+            activeIndex: e.currentTarget.id, 
+        });
+        this.setData({
+          price: that.data.foreignPrice,
+          foreignclasstype: '2',
         });
     },
     //跳转至下保单页面
@@ -51,12 +58,9 @@ Page({
     onLoad: function (options) {
         var that = this;
         that.setData({
-            price: options.price,
-        }),
-            that.setData({
-                classtype: options.classtype,
-            })
-        console.log(that.data.classtype);
+            price: that.data.innerPrice,
+            innerclasstype:'1',
+        })
     },
 
     /**
