@@ -1,4 +1,5 @@
 /**app.wxss**/
+@import 'weui.wxss';
 .container {
   height: 100%;
   display: flex;
@@ -10,13 +11,14 @@
 } 
 .bg {
   background-color: rgba(248, 246, 246, 0.993);
-  height:700px;
+  height:100%;
 }
 .page_hd {
   background-color: white;
-  height: 55px;
+  height: 100rpx;
   position:fixed; 
   bottom:0;
-  width: 750rpx;
+  width: 100%;
   z-index: 5;
+  border-top: 1px solid #ddd;
 }
