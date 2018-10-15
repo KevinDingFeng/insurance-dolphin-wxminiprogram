@@ -1,1 +1,35 @@
 /**index.wxss**/
+.bg_index{
+    background-color:#fff;
+}
+.mar_auto{
+    margin-left: 25rpx;
+    margin-right: 25rpx;
+}
+.mar_sx{
+    margin-top: 23rpx;
+    margin-bottom: 23rpx;
+}
+.weui-cell__bd{
+    color: #222222;
+    font-size: 28rpx;
+}
+.weui-cell__ft{
+    color: #d2d2d2;
+}
+.weui-cells:before {
+    border: none;
+}
+.weui-cells::after {
+    border: none;
+}
+
+.weui-cell:before {
+    border: none;
+}
+.company{
+    text-align: center;
+    color: #b1b1b1;
+    font-size: 28rpx;
+    margin-top: 90rpx;
+}

@@ -1,15 +1,24 @@
 <!--index.wxml-->
-<view class='bg'>
-  <view style='font-size:13px;color: rgb(172, 170, 170);padding-top:15px'>
-    <text space='nbsp'>     当天支付当即生效       全程理赔服务     太平洋保险品牌保证</text>  
-  </view>
-  <view >
-     <image src="../../images/insurance/index_in.png" style='width:100%;margin-top:7px;height:200px;' bindtap='to_detail_inner'/>
-  </view>
-  <view style=''>
-     <image src="../../images/insurance/index_foreign.png" style='width:50%;height:180px;' bindtap='to_detail_foreign'/>
-  </view>
-  <view class="page_hd">
-       <image src="../../images/insurance/index_page.png " style='width:25%;height:80%;margin-left:40%;margin-top:2%' bindtap='to_detail'/>
-  </view>
+<view class='bg' style='{{pageStyle}}'>
+    <view class='bg_index'>
+        <view class='mar_auto'>
+            <image src="../../images/insurance/index_banner_1.png" style='width:100%;margin-top:7px;height:408rpx;' bindtap='to_detail_inner' />
+        </view>
+        <view class='mar_auto'>
+            <image src="../../images/insurance/index_banner_2.png" style='width:100%;height:408rpx;' bindtap='to_detail_foreign' />
+        </view>
+    </view>
+    <view class='mar_sx'>
+       <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">常见问题</view>
+                <view class="weui-cell__ft">></view>
+            </view>
+        </view>
+    </view>
+    <view class='company'>
+        <view>北京伟林易航科技有限公司</view>
+        <view>海豚保险</view>
+    </view>
+    
 </view>
