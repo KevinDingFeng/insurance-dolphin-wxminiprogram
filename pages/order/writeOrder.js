@@ -15,27 +15,32 @@ Page({
     start: '',
     //用户输入下单信息
     userName: '',
-    userId:'',
-    flightNo:'',
+    userId: '',
+    flightNo: '',
     flightDate: '',
-    depCity:'',
-    arrCity:'',
-    telNumber:'',
-    markNumber:[],
-    pack1:'',
-    pack2:'',
-    pack3:'',
-    pack4:'',
-    pack5:'',
-    flag:'true',
-    depCityCode:'',
-    arrCityCode:'',
+    depCity: '',
+    arrCity: '',
+    telNumber: '',
+    markNumber: [],
+    pack1: '',
+    pack2: '',
+    pack3: '',
+    pack4: '',
+    pack5: '',
+    pNo1: 0,
+    pNo2: 0,
+    pNo3: 0,
+    pNo4: 0,
+    pNo5: 0,
+    flag: 'true',
+    depCityCode: '',
+    arrCityCode: '',
     //保险价格
-    total_fee:'',
+    total_fee: '',
     //国内还是国外
-    classtype:'',
+    classtype: '',
     //行李个数
-    packNum:1,
+    packNum: 1,
     //页面显示价格
     showPrice: '',
   },
@@ -52,7 +57,7 @@ Page({
     console.log(time);
   },
   //获取用户输入的起点和终点信息
- 
+
   startInput: function (e) {
     this.setData({
       depCity: e.detail.value
@@ -64,7 +69,7 @@ Page({
       arrCity: e.detail.value
     })
   },
- 
+
   //输入航班号获取起点和终点信息
   getCity: function (e) {
     let that = this;
@@ -123,7 +128,7 @@ Page({
       }
     })
   },
-  scanGetCity: function(e) {
+  scanGetCity: function (e) {
     let that = this;
     wx.request({
       url: config.baseUrl + '/customer/getFlight',
@@ -136,7 +141,7 @@ Page({
         that.setData({
           depCity: res.data.data.depCity,
           arrCity: res.data.data.arrCity,
-         // total_fee: res.data.data.total_fee,
+          // total_fee: res.data.data.total_fee,
         })
       },
 
@@ -152,7 +157,7 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      data: { 'depCity': that.data.depCity, 'arrCity': that.data.arrCity},
+      data: { 'depCity': that.data.depCity, 'arrCity': that.data.arrCity },
       success: function (res) {
         console.log(res);
         that.setData({
@@ -160,7 +165,7 @@ Page({
         })
         console.log(that.data.total_fee);
       },
-     
+
 
     })
   },
@@ -170,13 +175,17 @@ Page({
     wx.scanCode({
       scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
       success: function (res) {
-        console.log(res.result);
         that.setData({
-          pack1 : res.result,
-          packNum: that.data.packNum+1,
-          showPrice: that.data.packNum*that.data.total_fee,
+          pNo1: 1,
         })
-        console.log(that.data.packNum)
+        var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
+        that.setData({
+          packNum: num,
+        })
+        that.setData({
+          pack1: res.result,
+          showPrice: that.data.packNum * that.data.total_fee,
+        })
       }
     })
   },
@@ -185,10 +194,15 @@ Page({
     wx.scanCode({
       scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
       success: function (res) {
-        console.log(res.result);
+        that.setData({
+          pNo2: 1,
+        })
+        var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
+        that.setData({
+          packNum: num,
+        })
         that.setData({
           pack2: res.result,
-          packNum: that.data.packNum + 1,
           showPrice: that.data.packNum * that.data.total_fee,
         })
       }
@@ -199,10 +213,15 @@ Page({
     wx.scanCode({
       scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
       success: function (res) {
-        console.log(res.result);
+        that.setData({
+          pNo3: 1,
+        })
+        var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
+        that.setData({
+          packNum: num,
+        })
         that.setData({
           pack3: res.result,
-          packNum: that.data.packNum + 1,
           showPrice: that.data.packNum * that.data.total_fee,
         })
       }
@@ -213,10 +232,15 @@ Page({
     wx.scanCode({
       scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
       success: function (res) {
-        console.log(res.result);
+        that.setData({
+          pNo4: 1,
+        })
+        var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
+        that.setData({
+          packNum: num,
+        })
         that.setData({
           pack4: res.result,
-          packNum: that.data.packNum + 1,
           showPrice: that.data.packNum * that.data.total_fee,
         })
       }
@@ -227,15 +251,210 @@ Page({
     wx.scanCode({
       scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
       success: function (res) {
-        console.log(res.result);
+        that.setData({
+          pNo5: 1,
+        })
+        var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
+        that.setData({
+          packNum: num,
+        })
         that.setData({
           pack5: res.result,
-          packNum: that.data.packNum + 1,
           showPrice: that.data.packNum * that.data.total_fee,
         })
       }
     })
   },
+  //手动输入行李牌
+  p1blur: function (e) {
+    var that = this;
+    this.setData({
+      pack1: e.detail.value
+    })
+    if (e.detail.value != '') {
+      this.setData({
+        pNo1: 1
+      })
+      var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
+      that.setData({
+        packNum: num,
+      })
+      that.setData({
+        showPrice: that.data.packNum * that.data.total_fee,
+      })
+
+    } else {
+      this.setData({
+        pNo1: 0
+      })
+      var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
+      if (num == 0) {
+        that.setData({
+          packNum: 1,
+        })
+      } else {
+        that.setData({
+          packNum: num,
+        })
+      }
+
+      that.setData({
+        showPrice: that.data.packNum * that.data.total_fee,
+      })
+    }
+  },
+
+  p2blur: function (e) {
+    var that = this;
+    this.setData({
+      pack2: e.detail.value
+    })
+    if (e.detail.value != '') {
+      this.setData({
+        pNo2: 1
+      })
+      var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
+      that.setData({
+        packNum: num,
+      })
+      that.setData({
+        showPrice: that.data.packNum * that.data.total_fee,
+      })
+
+    } else {
+      this.setData({
+        pNo2: 0
+      })
+      var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
+      if (num == 0) {
+        that.setData({
+          packNum: 1,
+        })
+      } else {
+        that.setData({
+          packNum: num,
+        })
+      }
+      that.setData({
+        showPrice: that.data.packNum * that.data.total_fee,
+      })
+    }
+  },
+
+  p3blur: function (e) {
+    var that = this;
+    this.setData({
+      pack3: e.detail.value
+    })
+    if (e.detail.value != '') {
+      this.setData({
+        pNo3: 1
+      })
+      var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
+      that.setData({
+        packNum: num,
+      })
+      that.setData({
+        showPrice: that.data.packNum * that.data.total_fee,
+      })
+
+    } else {
+      this.setData({
+        pNo3: 0
+      })
+      var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
+      if (num == 0) {
+        that.setData({
+          packNum: 1,
+        })
+      } else {
+        that.setData({
+          packNum: num,
+        })
+      }
+      that.setData({
+        showPrice: that.data.packNum * that.data.total_fee,
+      })
+    }
+  },
+
+  p4blur: function (e) {
+    var that = this;
+    this.setData({
+      pack4: e.detail.value
+    })
+    if (e.detail.value != '') {
+      this.setData({
+        pNo4: 1
+      })
+      var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
+      that.setData({
+        packNum: num,
+      })
+      that.setData({
+        showPrice: that.data.packNum * that.data.total_fee,
+      })
+
+    } else {
+      this.setData({
+        pNo4: 0
+      })
+      var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
+      if (num == 0) {
+        that.setData({
+          packNum: 1,
+        })
+      } else {
+        that.setData({
+          packNum: num,
+        })
+      }
+      that.setData({
+        showPrice: that.data.packNum * that.data.total_fee,
+      })
+    }
+  },
+
+  p5blur: function (e) {
+    var that = this;
+    this.setData({
+      pack5: e.detail.value
+    })
+    if (e.detail.value != '') {
+      this.setData({
+        pNo5: 1
+      })
+      var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
+      that.setData({
+        packNum: num,
+      })
+      that.setData({
+        packNum: num,
+      })
+      that.setData({
+        showPrice: that.data.packNum * that.data.total_fee,
+      })
+
+    } else {
+      this.setData({
+        pNo5: 0
+      })
+      var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
+      if (num == 0) {
+        that.setData({
+          packNum: 1,
+        })
+      } else {
+        that.setData({
+          packNum: num,
+        })
+      }
+      that.setData({
+        showPrice: that.data.packNum * that.data.total_fee,
+      })
+    }
+  },
+
   //获取用户输入的手机号
   telNumberInput: function (e) {
     this.setData({
@@ -247,18 +466,19 @@ Page({
     var that = this;
     var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
     if (!myreg.test(e.detail.value)) {
-      wx.showToast({ 
-        title: '手机号有误！', 
-        icon: 'none', 
-        duration: 1500 })
+      wx.showToast({
+        title: '手机号有误！',
+        icon: 'none',
+        duration: 1500
+      })
       this.setData({
         flag: false
       })
-    }else{
+    } else {
       this.setData({
         flag: true
       })
-    } 
+    }
   },
 
   //点击支付按钮，获取openId，将openId传给下单方法
@@ -284,15 +504,15 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       data: {
-        'openid': openId, 
-        'applyname':that.data.userName,
-        'applycardcode':that.data.userId,
-        'saildate':that.data.flightDate,
-        'voyno':that.data.flightNo,
-        'startport':that.data.depCity,
-        'endport':that.data.arrCity,
+        'openid': openId,
+        'applyname': that.data.userName,
+        'applycardcode': that.data.userId,
+        'saildate': that.data.flightDate,
+        'voyno': that.data.flightNo,
+        'startport': that.data.depCity,
+        'endport': that.data.arrCity,
         'markString': that.data.markNumber,
-        'amount': that.data.total_fee, 
+        'amount': that.data.showPrice,
         'insuranttel': that.data.telNumber,
         'classestype': that.data.classtype,
       },
@@ -301,7 +521,7 @@ Page({
       }
     })
   },
- 
+
   //申请支付
   requestPayment: function (obj) {
     console.log(obj);
@@ -326,7 +546,7 @@ Page({
   /**
    * 投保须知页面跳转
    */
-  instructions: function() {
+  instructions: function () {
     wx.navigateTo({
       url: '/pages/instructions/instructions'
     })
@@ -347,7 +567,7 @@ Page({
       flightNo: e.detail.value.flightNo,
       depCity: e.detail.value.depCity,
       arrCity: e.detail.value.arrCity,
-      
+
     })
     console.log(that.data.arrCity.length);
     if (e.detail.value.length == 0 || e.detail.value.length == 0 ||
@@ -369,7 +589,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+
     var that = this;
     var _date = util.formatDate(new Date());
     that.setData({
@@ -377,7 +597,7 @@ Page({
     })
     that.setData({
       total_fee: options.price,
-      showPrice: options.price,      
+      showPrice: options.price,
       classtype: options.classtype,
     })
   },
