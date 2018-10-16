@@ -24,6 +24,12 @@
                 <input placeholder="请输入身份证号" class='_input' name="userId" maxlength='18' value='{{userInfo.user_num}}' bindblur='peo_num_Blur'/>
             </view>
         </view>
+         <view class="weui-cell">
+            <view class="peo_xx_left">手机号码</view>
+            <view class="weui-cell__ft peo_xx_right">
+                <input placeholder="请输入手机号" class='_input'  name="telNumber" maxlength='11' value='{{telNumber}}' bindblur='blurPhone'/>
+            </view>
+        </view>
     </view>
     <!-- 航班信息 -->
     <view class="weui-cells weui-cells_after-title mar_tb">

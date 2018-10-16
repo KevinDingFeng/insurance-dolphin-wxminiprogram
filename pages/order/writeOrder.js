@@ -240,7 +240,7 @@ Page({
                     } else if (_xl_list[_xl_list.length-1].pack1!=""){
                         _num = _xl_list.length;
                         wx.showToast({
-                            title: '请添加行李单！',
+                            title: '请先添加行李单！',
                             icon: 'none',
                             duration: 1500
                         })
@@ -269,17 +269,24 @@ Page({
             return;
         }
         let _index = e.currentTarget.dataset.index;
+        let p_inde = parseInt(_index)-1;
+        let _p_inde = String(p_inde)
+        
         let _num = 0;
         for (let i = 0; i < _cc.length; i++) {
-            if ( _index - 1 != 0 && _cc[_index - 1].pack1 == ""){
+            if (p_inde != 0 && _cc[_p_inde].pack1 != ""){
+                that.setData({
+                    xl_list: _cc,
+                })
                 wx.showToast({
                     title: '请先添加上一个行李单！',
                     icon: 'none',
                     duration: 1500
                 })
-                break;
+                return
             }
-           else if (_cc[i].pack1 !="" ){
+
+           if (_cc[i].pack1 !="" ){
                 _num = _num+1;
             }else if (_cc[i].id == _index) {
                 _cc[i].pack1 = _val;
@@ -484,6 +491,16 @@ Page({
     order: function (openId) {
         console.log(openId);
         var that = this;
+        console.log(that.data.classtype);
+        let _arr = that.data.xl_list;
+        let c_arr = [];
+        for (let i = 0; i < _arr.length;i++){
+            let _obj ={};
+            _obj={
+                mark: _arr[i].pack1
+            }
+            c_arr.push(_obj)
+        }
         wx.request({
             url: config.baseUrl + '/pay/order',
             header: {
@@ -491,16 +508,16 @@ Page({
             },
             data: {
                 'openid': openId,
-                'applyname': that.data.userInfo.user_name,
-                'applycardcode': that.data.userInfo.user_num,
+                'applyname': that.data.userName,
+                'applycardcode': that.data.userId,
                 'saildate': that.data.flightDate,
                 'voyno': that.data.flightNo,
                 'startport': that.data.depCity,
                 'endport': that.data.arrCity,
-                'orderAmount': that.data.showPrice,
-                //'insuranttel': that.data.telNumber,
+                'amount': that.data.showPrice,
+                'insuranttel': that.data.telNumber,
                 'classestype': that.data.classtype,
-                'markString': that.data.xl_list,
+                "markString": c_arr
             },
             success: function (res) {
                 that.requestPayment(res.data);
