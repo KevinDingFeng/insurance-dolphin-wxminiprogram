@@ -109,32 +109,6 @@ Page({
         })
     },
 
-    //输入航班号获取起点和终点信息
-    getCity: function (e) {
-        let that = this;
-        wx.request({
-            url: config.baseUrl + '/customer/flight',
-            header: {
-                'content-type': 'application/x-www-form-urlencoded'
-            },
-            data: { 'flightNo': that.data.flightNo, 'flightDate': that.data.flightDate },
-            success: function (res) {
-                console.log(res.data.data.depCity);
-                that.setData({
-                    depCity: res.data.data.depCity,
-                    arrCity: res.data.data.arrCity
-                })
-            },
-            fail: function (res) {
-                wx.showToast({
-                    title: '输入的航班号有误！',
-                    icon: 'none',
-                    duration: 1500
-                })
-            }
-
-        })
-    },
     //扫描获取航班号和城市的起点和终点
     scanFlight: function () {
         var that = this;
@@ -429,7 +403,7 @@ Page({
             return
         } else {
             that.setData({
-                depCity: _name
+              depCity: hb_f
             })
         }
     },
@@ -445,8 +419,9 @@ Page({
             return
         } else {
             that.setData({
-                arrCity: _name
+              arrCity: hb_z
             })
+            that.getPrice();
         }
     },
     //获取用户输入的手机号
@@ -491,7 +466,7 @@ Page({
     order: function (openId) {
         console.log(openId);
         var that = this;
-        console.log(that.data.classtype);
+      console.log(that.data.telNumber);
         let _arr = that.data.xl_list;
         let c_arr = [];
         for (let i = 0; i < _arr.length;i++){
@@ -508,13 +483,13 @@ Page({
             },
             data: {
                 'openid': openId,
-                'applyname': that.data.userName,
-                'applycardcode': that.data.userId,
+                'applyname': that.data.userInfo.user_name,
+                'applycardcode': that.data.userInfo.user_num,
                 'saildate': that.data.flightDate,
                 'voyno': that.data.flightNo,
                 'startport': that.data.depCity,
                 'endport': that.data.arrCity,
-                'amount': that.data.showPrice,
+                'orderAmount': that.data.showPrice,
                 'insuranttel': that.data.telNumber,
                 'classestype': that.data.classtype,
                 "markString": c_arr
