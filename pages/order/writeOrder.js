@@ -231,6 +231,7 @@ Page({
             scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
             success: function (res) {
                 var _xl_list = that.data.xl_list;//行李信息
+                
                 let _num = 0;
                 for (var i = 0; i <= _xl_list.length; i++) {
                     if (_xl_list[i].pack1 == "") {
@@ -269,28 +270,35 @@ Page({
             return;
         }
         let _index = e.currentTarget.dataset.index;
-        let p_inde = parseInt(_index)-1;
+        let p_inde = parseInt(_index)-2;
+        if (p_inde<0){
+            p_inde = 0;
+        }
         let _p_inde = String(p_inde)
         
         let _num = 0;
         for (let i = 0; i < _cc.length; i++) {
-            if (p_inde != 0 && _cc[_p_inde].pack1 != ""){
-                that.setData({
-                    xl_list: _cc,
-                })
-                wx.showToast({
-                    title: '请先添加上一个行李单！',
-                    icon: 'none',
-                    duration: 1500
-                })
-                return
-            }
-
-           if (_cc[i].pack1 !="" ){
+           
+            if (_cc[i].pack1 !="" ){
                 _num = _num+1;
             }else if (_cc[i].id == _index) {
                 _cc[i].pack1 = _val;
+                that.setData({
+                    xl_list: _cc,
+                })
                 _num = _num + 1;
+                if (_cc[_p_inde].pack1 == "") {
+                    _cc[i].pack1 = "";
+                    that.setData({
+                        xl_list: _cc
+                    })
+                    wx.showToast({
+                        title: '请先添加上一个行李单！',
+                        icon: 'none',
+                        duration: 1500
+                    })
+                    return
+                }
                 break;
             } else if (_cc[_cc.length-1].pack1!=""){
                 _num = _cc.length;
@@ -304,7 +312,7 @@ Page({
         }
         
         that.setData({
-            xl_list: _cc,
+            // xl_list: _cc,
             showPrice: _num * that.data.total_fee,// 
         })
         // this.setData({
