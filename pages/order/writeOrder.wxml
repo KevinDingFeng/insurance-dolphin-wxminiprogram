@@ -1,75 +1,195 @@
 <!--pages/order/writeOrder.wxml-->
-<view class='bg order_bg'> 
-   <view>
-      <image src="../../images/insurance/order_top.png" style='height:50px;width:100%;margin-top:5px' />
-  </view>
-  <form bindsubmit="formSubmit" bindreset="formReset">
-  <view class='message'>
-    <text>被保人姓名\n</text>
-    <input placeholder="请填写本人身份信息，不可更改"  class='_input' name="userName"/>
-    <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
-    <text>身份证号\n</text>
-    <input maxlength='18' class='_input' name="userId"/>
-    <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
-    <text>航班日期\n</text>
-     <picker mode="date" value="{{flightDate}}" start="{{start}}" end="2999-12-12" bindchange="datePickerBindchange" bindtouchend='checkDate' class="_date" name="flightDate">
-        <view>
-          <text style='position:relative;bottom:7px;'> {{flightDate}} </text> 
-          <image src="../../images/insurance/down.png" style='height:20px;width:30px;position:relative;left:200px'></image>
+<view class='order_bg'>
+    <!-- 个人信息 -->
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class='left_tiao'></view>
+            <view class='title_bx'>个人信息</view>
         </view>
-    </picker>
-    <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
-
-
-
-    <text>航班号</text>
-    <input maxlength='6' class='_input' value='{{flightNo}}' name="flightNo"/>
-    <image src="../../images/insurance/scan.png" style='height:25px;width:25px;' bindtap='scanFlight'></image>
-
-    <image src="../../images/insurance/line.png" style='height:2px;width:98%;'></image>
-    <text>起点</text>
-    <input  class='_input' value='{{depCity}}' name="depCity" bindinput='startInput'/>
-    <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
-    <text>终点</text>
-    <input  class='_input' value='{{arrCity}}' bindblur='getPrice' name="arrCity" bindinput='endInput'/>
-     <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
-    <text>行李牌号码\n
-    </text>
-   <input data-index="{{2}}" class='_input' name="mark1"  value="{{pack1}}" bindblur='p1blur'/>
-    <image src="../../images/insurance/scan.png" style='height:25px;width:25px;' bindtap='scanPackage1'></image>
-     <text>行李牌号码\n</text>
-    <input class='_input' name="mark2" value='{{pack2}}' bindblur='p2blur'/>
-    <image src="../../images/insurance/scan.png" style='height:25px;width:25px;' bindtap='scanPackage2'></image>
-     <text>行李牌号码\n</text>
-    <input class='_input' name="mark3" value='{{pack3}}' bindblur='p3blur'/>
-    <image src="../../images/insurance/scan.png" style='height:25px;width:25px;' bindtap='scanPackage3'></image>
-     <text>行李牌号码\n</text>
-    <input class='_input' name="mark4" value='{{pack4}}' bindblur='p4blur'/>
-    <image src="../../images/insurance/scan.png" style='height:25px;width:25px;' bindtap='scanPackage4'></image>
-     <text>行李牌号码\n</text>
-    <input class='_input' name="mark5" value='{{pack5}}' bindblur='p5blur'/>
-    <image src="../../images/insurance/scan.png" style='height:25px;width:25px;' bindtap='scanPackage5'></image>
-  </view>
-
-   <view class='message' >
-    <text>手机号\n</text>
-    <input placeholder="用于接收订单相关信息" maxlength='11' bindinput="telNumberInput" bindblur='blurPhone' class='_input' style='width:180px' name="telNumber"/>
-  </view>
-  <image src="../../images/insurance/yes.png" style='height:30px;width:30px;margin-bottom:9px;margin-left:10px;'></image>
-    <view style='margin-top:-37px;margin-left:43px;height:120px'>
-    我同意
-    <text style='color:rgba(18, 194, 97, 0.774)' bindtap='instructions'>《投保须知》</text>  和
-    <text style='color:rgba(18, 194, 97, 0.774)'>《保险适用条款》</text> 
+        <view class="weui-cell">
+            <view class="peo_xx_left">姓名</view>
+            <view class="weui-cell__ft peo_xx_right">
+                <input placeholder="请输入您的姓名" class='_input' name="userName" />
+            </view>
+        </view>
+        <view class="weui-cell">
+            <view class="peo_xx_left">证件类型</view>
+            <view class="weui-cell__ft peo_xx_right">
+                <input placeholder="请选择证件类型>" class='_input' name="userName" />
+            </view>
+        </view>
+        <view class="weui-cell">
+            <view class="peo_xx_left">证件号</view>
+            <view class="weui-cell__ft peo_xx_right">
+                <input placeholder="请输入证件号" class='_input' name="userId" maxlength='18' />
+            </view>
+        </view>
     </view>
+    <!-- 航班信息 -->
+    <view class="weui-cells weui-cells_after-title mar_tb">
+        <view class="weui-cell">
+            <view class='left_tiao'></view>
+            <view class='title_bx'>航班信息</view>
+            <view class="weui-cell__ft peo_xx_right title_sty">
+                扫登机牌可获取下述信息
+                <image src='../../images/s_s.png'></image>
+            </view>
+        </view>
+        <view class="weui-cell">
+            <view class="peo_xx_left">航班号</view>
+            <view class="weui-cell__ft peo_xx_right">
+                <input placeholder="请输入航班号" maxlength='6' class='_input' value='{{flightNo}}' name="flightNo" />
+            </view>
+        </view>
+        <view class="weui-cell">
+            <view class="peo_xx_left">日期</view>
+            <view class="weui-cell__ft peo_xx_right">
 
-
-  <view class="page_hd">
-    <view style='position:fixed;margin-left:100px;margin-top:10px;font-size:25px;color:rgba(18, 194, 97, 0.774);'>{{showPrice*0.01}}￥</view>   
-
-       <button class="page_hd_ch" style="position:fixed;right:10px;bottom:0px;background-color: rgba(18, 194, 97, 0.774);width:35%;margin-bottom:10px;" formType="submit">
-        立即投保
+            </view>
+        </view>
+        <view class="weui-cell">
+            <view class="peo_xx_left">始发站</view>
+            <view class="weui-cell__ft peo_xx_right">
+                <input placeholder="请输入始发站" class='_input' value='{{depCity}}' name="depCity" bindinput='startInput' />
+            </view>
+        </view>
+        <view class="weui-cell">
+            <view class="peo_xx_left">终发站</view>
+            <view class="weui-cell__ft peo_xx_right">
+                <input placeholder="请输入终点站" class='_input' value='{{arrCity}}' bindblur='getPrice' name="arrCity" bindinput='endInput' />
+            </view>
+        </view>
+    </view>
+    <!-- 行李单信息 -->
+    <view class="weui-cells weui-cells_after-title mar_tb">
+        <view class="weui-cell">
+            <view class='left_tiao'></view>
+            <view class='title_bx'>行李单信息</view>
+            <view class="weui-cell__ft peo_xx_right title_sty1">
+                扫登机牌可获取下述信息
+                <image src='../../images/s_s.png'></image>
+            </view>
+        </view>
+        <view wx:for="{{xl_list}}" wx:for-item="item">
+            <view class="weui-cell">
+                <view class="peo_xx_left">{{item.name}}</view>
+                <view class="weui-cell__ft peo_xx_right">
+                    <input placeholder="请输入行李单号" data-index="{{item.id}}" class='_input' name="mark1" value="{{item.pack1}}" bindblur='p1blur' />
+                </view>
+            </view>
+        </view>
+        <view class="weui-cell">
+            <view class="peo_xx_left"></view>
+            <view class="weui-cell__ft peo_xx_right dh_sty" bindtap="add_dh">
+                <image src='../../images/add_dh.png'></image>
+                添加行李单号
+            </view>
+        </view>
+    </view>
+    <!-- 行李单信息 -->
+    <view class="weui-cells weui-cells_after-title mar_tb">
+        <view class="weui-cell">
+            <view class='left_tiao'></view>
+            <view class='title_bx'>投保确认</view>
+        </view>
+        <view class="weui-cell">
+            <view class="peo_xx_left left_sty">投保人和承包人是否一致</view>
+            <view class="weui-cell__ft peo_xx_right"> </view>
+        </view>
+        <view class="weui-cell">
+            <view class="peo_xx_left">投保人姓名</view>
+            <view class="weui-cell__ft peo_xx_right">
+                <input placeholder="请输入承包人姓名" class='_input' value='{{cb_name}}' name="depCity" />
+            </view>
+        </view>
+    </view>
+    <!-- 行李单信息 -->
+    <view class="weui-cells weui-cells_after-title mar_tb bg_none" style='margin-bottom:130rpx;'>
+        <checkbox-group  bindchange="checkboxChange">
+            <label class="checkbox" wx:for="{{items}}">
+                <checkbox value="" checked="{{item.checked}}" />{{item.value}}<a class="xy_sty" href="#">{{item.name}}</a>
+            </label>
+        </checkbox-group>
+    </view>
+    <!-- 去支付 -->
+    <view class="page_hd ">
+        <view class='price_cc'>
+            <text>￥ </text>
+            <text class="price_sty"> {{price*0.01}}</text>
+        </view>
+        <button class="page_hd_ch" style="position:fixed;right:10px;bottom:0px;" open-type="getUserInfo" bindgetuserinfo='to_insured'>
+            去投保 >
         </button>
-  </view>
-
-  </form>
+    </view>
 </view>
+<!-- <view>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+        <view class='message'>
+            <text>被保人姓名\n</text>
+            <input placeholder="请填写本人身份信息，不可更改" class='_input' name="userName" />
+            <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
+            <text>身份证号\n</text>
+            <input maxlength='18' class='_input' name="userId" />
+            <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
+            <text>航班日期\n</text>
+            <picker mode="date" value="{{flightDate}}" start="{{start}}" end="2999-12-12" bindchange="datePickerBindchange" bindtouchend='checkDate' class="_date" name="flightDate">
+                <view>
+                    <text style='position:relative;bottom:7px;'> {{flightDate}} </text>
+                    <image src="../../images/insurance/down.png" style='height:20px;width:30px;position:relative;left:200px'></image>
+                </view>
+            </picker>
+            <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
+
+
+
+            <text>航班号</text>
+            <input maxlength='6' class='_input' value='{{flightNo}}' name="flightNo" />
+            <image src="../../images/insurance/scan.png" style='height:25px;width:25px;' bindtap='scanFlight'></image>
+
+            <image src="../../images/insurance/line.png" style='height:2px;width:98%;'></image>
+            <text>起点</text>
+            <input class='_input' value='{{depCity}}' name="depCity" bindinput='startInput' />
+            <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
+            <text>终点</text>
+            <input class='_input' value='{{arrCity}}' bindblur='getPrice' name="arrCity" bindinput='endInput' />
+            <image src="../../images/insurance/line.png" style='height:2px;width:98%;margin-bottom:9px;'></image>
+            <text>行李牌号码\n
+    </text>
+            <input data-index="{{2}}" class='_input' name="mark1" value="{{pack1}}" bindblur='p1blur' />
+            <image src="../../images/insurance/scan.png" style='height:25px;width:25px;' bindtap='scanPackage1'></image>
+            <text>行李牌号码\n</text>
+            <input class='_input' name="mark2" value='{{pack2}}' bindblur='p2blur' />
+            <image src="../../images/insurance/scan.png" style='height:25px;width:25px;' bindtap='scanPackage2'></image>
+            <text>行李牌号码\n</text>
+            <input class='_input' name="mark3" value='{{pack3}}' bindblur='p3blur' />
+            <image src="../../images/insurance/scan.png" style='height:25px;width:25px;' bindtap='scanPackage3'></image>
+            <text>行李牌号码\n</text>
+            <input class='_input' name="mark4" value='{{pack4}}' bindblur='p4blur' />
+            <image src="../../images/insurance/scan.png" style='height:25px;width:25px;' bindtap='scanPackage4'></image>
+            <text>行李牌号码\n</text>
+            <input class='_input' name="mark5" value='{{pack5}}' bindblur='p5blur' />
+            <image src="../../images/insurance/scan.png" style='height:25px;width:25px;' bindtap='scanPackage5'></image>
+        </view>
+
+        <view class='message'>
+            <text>手机号\n</text>
+            <input placeholder="用于接收订单相关信息" maxlength='11' bindinput="telNumberInput" bindblur='blurPhone' class='_input' style='width:180px' name="telNumber" />
+        </view>
+        <image src="../../images/insurance/yes.png" style='height:30px;width:30px;margin-bottom:9px;margin-left:10px;'></image>
+        <view style='margin-top:-37px;margin-left:43px;height:120px'>
+            我同意
+            <text style='color:rgba(18, 194, 97, 0.774)' bindtap='instructions'>《投保须知》</text> 和
+            <text style='color:rgba(18, 194, 97, 0.774)'>《保险适用条款》</text>
+        </view>
+
+
+        <view class="page_hd">
+            <view style='position:fixed;margin-left:100px;margin-top:10px;font-size:25px;color:rgba(18, 194, 97, 0.774);'>{{showPrice*0.01}}￥</view>
+
+            <button class="page_hd_ch" style="position:fixed;right:10px;bottom:0px;background-color: rgba(18, 194, 97, 0.774);width:35%;margin-bottom:10px;" formType="submit">
+                立即投保
+            </button>
+        </view>
+
+    </form>
+</view> -->

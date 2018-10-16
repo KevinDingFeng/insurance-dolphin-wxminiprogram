@@ -26,7 +26,7 @@
                                 <view class="placeholder">保障期限</view>
                             </view>
                             <view class="weui-flex__item">
-                                <view class="placeholder">18-80岁</view>
+                                <view class="placeholder">0-100岁</view>
                                 <view class="placeholder">保障年龄</view>
                             </view>
                         </view>
@@ -34,7 +34,7 @@
                     <view>
                         <view class="weui-cells weui-cells_after-title">
                             <view class="weui-cell">
-                                <view class='title_bx'>保障险情</view>
+                                <view class='title_bx'>保障详情</view>
                             </view>    
                             <view class="weui-cell">
                                 <view class="weui-cell__bd">国内托运行李意外丢失最高赔付</view>
@@ -65,7 +65,7 @@
                     <view>
                         <view class="weui-flex">
                             <view class="weui-flex__item">
-                                <view class="placeholder">国内</view>
+                                <view class="placeholder">国际</view>
                                 <view class="placeholder">承保范围</view>
                             </view>
                             <view class="weui-flex__item">
@@ -73,7 +73,7 @@
                                 <view class="placeholder">保障期限</view>
                             </view>
                             <view class="weui-flex__item">
-                                <view class="placeholder">18-80岁</view>
+                                <view class="placeholder">0-10 0岁</view>
                                 <view class="placeholder">保障年龄</view>
                             </view>
                         </view>
@@ -81,26 +81,23 @@
                     <view>
                         <view class="weui-cells weui-cells_after-title">
                             <view class="weui-cell">
-                                <view class='title_bx'>保障险情</view>
+                                <view class='title_bx'>保障详情</view>
                             </view>
                             <view class="weui-cell">
-                                <view class="weui-cell__bd">国内航班延误最高赔付</view>
-                                <view class="weui-cell__ft">70元</view>
+                                <view class="weui-cell__bd">国际托运行李意外丢失最高赔付</view>
+                                <view class="weui-cell__ft">2000元</view>
                             </view>
                             <view class="weui-cell">
-                                <view class="weui-cell__bd">国内托运行李损失保障赔付</view>
-                                <view class="weui-cell__ft">500元</view>
+                                <view class="weui-cell__bd">国际托运行李损失保障赔付</view>
+                                <view class="weui-cell__ft">2000元</view>
                             </view>
                             <view class="weui-cell">
-                                <view class="weui-cell__bd">国内托运行李箱体损失赔付 </view>
-                                <view class="weui-cell__ft">200元</view>
+                                <view class="weui-cell__bd">国际托运行李箱体损失赔付</view>
+                                <view class="weui-cell__ft">300元</view>
                             </view>
                             <view class="weui-cell">
-                                <view class="weui-cell__ft">（最高赔偿至延误到达6小时）</view>
-                             </view>
-                            <view class="weui-cell">
-                                <view class="weui-cell__bd">航空意外身故及伤残</view>
-                                <view class="weui-cell__ft">500万</view>
+                                <view class="weui-cell__bd">国际行李迟运赔付</view>
+                                <view class="weui-cell__ft">300元</view>
                             </view>
                         </view>
                     </view>
