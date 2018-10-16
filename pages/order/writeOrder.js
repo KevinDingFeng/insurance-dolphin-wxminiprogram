@@ -484,7 +484,6 @@ Page({
     order: function (openId) {
         console.log(openId);
         var that = this;
-        console.log(that.data.classtype);
         wx.request({
             url: config.baseUrl + '/pay/order',
             header: {
@@ -492,15 +491,16 @@ Page({
             },
             data: {
                 'openid': openId,
-                'applyname': that.data.userName,
-                'applycardcode': that.data.userId,
+                'applyname': that.data.userInfo.user_name,
+                'applycardcode': that.data.userInfo.user_num,
                 'saildate': that.data.flightDate,
                 'voyno': that.data.flightNo,
                 'startport': that.data.depCity,
                 'endport': that.data.arrCity,
-                'amount': that.data.showPrice,
-                'insuranttel': that.data.telNumber,
+                'orderAmount': that.data.showPrice,
+                //'insuranttel': that.data.telNumber,
                 'classestype': that.data.classtype,
+                'markString': that.data.xl_list,
             },
             success: function (res) {
                 that.requestPayment(res.data);
