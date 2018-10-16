@@ -9,19 +9,19 @@
         <view class="weui-cell">
             <view class="peo_xx_left">姓名</view>
             <view class="weui-cell__ft peo_xx_right">
-                <input placeholder="请输入您的姓名" class='_input' name="userName" />
+                <input placeholder="请输入您的姓名" class='_input' name="userName" value='{{userInfo.user_name}}' data-cc='{{userInfo.user_name}}' bindblur='peo_name_Blur'/>
             </view>
         </view>
-        <view class="weui-cell">
+        <!-- <view class="weui-cell">
             <view class="peo_xx_left">证件类型</view>
             <view class="weui-cell__ft peo_xx_right">
-                <input placeholder="请选择证件类型>" class='_input' name="userName" />
+                <input placeholder="请选择证件类型>" class='_input' name="userName" bindtap="open" /> 
             </view>
-        </view>
+        </view> -->
         <view class="weui-cell">
-            <view class="peo_xx_left">证件号</view>
+            <view class="peo_xx_left">身份证号</view>
             <view class="weui-cell__ft peo_xx_right">
-                <input placeholder="请输入证件号" class='_input' name="userId" maxlength='18' />
+                <input placeholder="请输入身份证号" class='_input' name="userId" maxlength='18' value='{{userInfo.user_num}}' bindblur='peo_num_Blur'/>
             </view>
         </view>
     </view>
@@ -32,31 +32,35 @@
             <view class='title_bx'>航班信息</view>
             <view class="weui-cell__ft peo_xx_right title_sty">
                 扫登机牌可获取下述信息
-                <image src='../../images/s_s.png'></image>
+                <image src='../../images/s_s.png' bindtap='scanFlight'></image>
             </view>
         </view>
         <view class="weui-cell">
             <view class="peo_xx_left">航班号</view>
             <view class="weui-cell__ft peo_xx_right">
-                <input placeholder="请输入航班号" maxlength='6' class='_input' value='{{flightNo}}' name="flightNo" />
+                <input placeholder="请输入航班号" maxlength='6' class='_input' value='{{flightNo}}' name="flightNo"  bindblur='hb_num_Blur'/>
             </view>
         </view>
         <view class="weui-cell">
             <view class="peo_xx_left">日期</view>
             <view class="weui-cell__ft peo_xx_right">
-
+                <picker mode="date" value="{{flightDate}}" start="{{start}}" end="2999-12-12" bindchange="datePickerBindchange" bindtouchend='checkDate' class="_date" name="flightDate">
+                    <view class='time_data'>
+                        <input placeholder="请输入当前日期" class='_input' value='{{flightDate}}' name="depCity"  bindblur='hb_time_Blur'/>
+                    </view>
+                </picker>
             </view>
         </view>
         <view class="weui-cell">
             <view class="peo_xx_left">始发站</view>
             <view class="weui-cell__ft peo_xx_right">
-                <input placeholder="请输入始发站" class='_input' value='{{depCity}}' name="depCity" bindinput='startInput' />
+                <input placeholder="请输入始发站" class='_input' value='{{depCity}}' name="depCity" bindinput='startInput'  bindblur='hb_sf_Blur'/>
             </view>
         </view>
         <view class="weui-cell">
-            <view class="peo_xx_left">终发站</view>
+            <view class="peo_xx_left">终点站</view>
             <view class="weui-cell__ft peo_xx_right">
-                <input placeholder="请输入终点站" class='_input' value='{{arrCity}}' bindblur='getPrice' name="arrCity" bindinput='endInput' />
+                <input placeholder="请输入终点站" class='_input' value='{{arrCity}}' bindblur='getPrice' name="arrCity" bindinput='endInput'  bindblur='hb_zd_Blur'/>
             </view>
         </view>
     </view>
@@ -67,7 +71,7 @@
             <view class='title_bx'>行李单信息</view>
             <view class="weui-cell__ft peo_xx_right title_sty1">
                 扫登机牌可获取下述信息
-                <image src='../../images/s_s.png'></image>
+                <image src='../../images/s_s.png' bindtap='scanPackage1'></image>
             </view>
         </view>
         <view wx:for="{{xl_list}}" wx:for-item="item">
@@ -86,7 +90,7 @@
             </view>
         </view>
     </view>
-    <!-- 行李单信息 -->
+    <!-- 行李单信息
     <view class="weui-cells weui-cells_after-title mar_tb">
         <view class="weui-cell">
             <view class='left_tiao'></view>
@@ -102,12 +106,13 @@
                 <input placeholder="请输入承包人姓名" class='_input' value='{{cb_name}}' name="depCity" />
             </view>
         </view>
-    </view>
-    <!-- 行李单信息 -->
+    </view> -->
+    <!-- 投保信息 -->
     <view class="weui-cells weui-cells_after-title mar_tb bg_none" style='margin-bottom:130rpx;'>
-        <checkbox-group  bindchange="checkboxChange">
-            <label class="checkbox" wx:for="{{items}}">
-                <checkbox value="" checked="{{item.checked}}" />{{item.value}}<a class="xy_sty" href="#">{{item.name}}</a>
+        <checkbox-group bindchange="checkboxChange" >
+            <label class="checkbox" wx:for="{{items}}"  wx:for-item="item">
+                <checkbox value='{{item.checked}}'  checked="{{item.checked}}"/>{{item.value}}
+                <a class="xy_sty" href="#">{{item.name}}</a>
             </label>
         </checkbox-group>
     </view>
@@ -115,14 +120,14 @@
     <view class="page_hd ">
         <view class='price_cc'>
             <text>￥ </text>
-            <text class="price_sty"> {{price*0.01}}</text>
+            <text class="price_sty"> {{showPrice}}</text>
         </view>
-        <button class="page_hd_ch" style="position:fixed;right:10px;bottom:0px;" open-type="getUserInfo" bindgetuserinfo='to_insured'>
+        <button class="page_hd_ch" style="position:fixed;right:10px;bottom:0px;" open-type="getUserInfo" bindgetuserinfo='to_insured' bindtap='go_zf'>
             去投保 >
         </button>
     </view>
 </view>
-<!-- <view>
+ <!-- <view>
     <form bindsubmit="formSubmit" bindreset="formReset">
         <view class='message'>
             <text>被保人姓名\n</text>

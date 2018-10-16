@@ -19,7 +19,6 @@
 checkbox {
     margin-left: 29rpx;
 }
-
 checkbox .wx-checkbox-input {
     border-radius: 3rpx;
     height: 28rpx;
@@ -38,8 +37,11 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
 
 .bg_none {
     background-color: #f5f5f5 !important;
+    
 }
-
+.time_data{
+    margin-top: 25rpx;
+}
 .peo_xx {
     display: flex;
     flex-direction: row;

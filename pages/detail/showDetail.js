@@ -7,9 +7,9 @@ Page({
      * 页面的初始数据
      */
     data: {
-        price: '',
-        foreignPrice: '2000',
-        innerPrice: '1000',
+        price: 10,
+        foreignPrice: '20',
+        innerPrice: '10',
         innerclasstype: '',
         foreignclasstype:'',
         tabs: ["国内", "国际"],
@@ -33,10 +33,18 @@ Page({
             sliderOffset: e.currentTarget.offsetLeft,
             activeIndex: e.currentTarget.id, 
         });
-        this.setData({
-          price: that.data.foreignPrice,
-          foreignclasstype: '2',
-        });
+       
+        let _activeIndex = this.data.activeIndex;
+        if (_activeIndex == "1"){
+            this.setData({
+                price: 20,
+            });
+        }else{
+            this.setData({
+                price: 10,
+            });
+        }
+        
     },
     //跳转至下保单页面
     to_insured: function (e) {
@@ -46,6 +54,11 @@ Page({
                 //获取用户数据
                 app.login();
             }
+            let _id = e.currentTarget.dataset;
+            _id = Number(_id.id)
+            this.setData({
+                classtype: _id+1,
+            });
             wx.navigateTo({
                 url: '/pages/order/writeOrder?price=' + this.data.price + '&classtype=' + this.data.classtype
             })

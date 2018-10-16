@@ -112,9 +112,9 @@
     <view class="page_hd">
         <view class='price_cc'>
             <text>￥ </text>
-            <text class="price_sty"> {{price*0.01}}</text>
+            <text class="price_sty"> {{price}}</text>
         </view>
-        <button class="page_hd_ch" style="position:fixed;right:10px;bottom:0px;" open-type="getUserInfo" bindgetuserinfo='to_insured'>
+        <button class="page_hd_ch" style="position:fixed;right:10px;bottom:0px;" open-type="getUserInfo" bindgetuserinfo='to_insured' data-id='{{activeIndex}}'>
             立即投保 >
         </button>
     </view>
