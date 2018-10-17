@@ -2,8 +2,10 @@
 const app = getApp()
 var config = require('../../utils/config.js');
 var util = require('../../utils/util.js');
+var name_reg = /^[\u0391-\uFFE5]+$/; //姓名中文验证
+var phone_reg = /^[1][0-9][0-9]{9}$/;//手机号码正则
+var sf_reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/; //身份证号
 Page({
-
     /**
      * 页面的初始数据
      */
