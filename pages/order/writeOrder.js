@@ -64,13 +64,21 @@ Page({
         let that = this;
         let _arr = that.data.xl_list;
         let _num = String(_arr.length + 1)
-        _arr.push(
-            {
-                id: _num,
-                name: "行李单号" + (_arr.length + 1),
-                pack1: ""
-            }
-        )
+        if (_arr.length == 5){
+            wx.showToast({
+                title: '最多添加5个行李单',
+                icon: 'none',
+                duration: 2000
+            })
+        }else{
+            _arr.push(
+                {
+                    id: _num,
+                    name: "行李单号" + (_arr.length + 1),
+                    pack1: ""
+                }
+            )
+        }
         this.setData({
             xl_list: _arr
         })

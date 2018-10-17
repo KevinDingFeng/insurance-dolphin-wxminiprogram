@@ -6,7 +6,7 @@
     border-right: 1px solid #ddd;
 }
 .weui-navbar__slider {
-    width: 3em;
+    width: 4em;
 }
 .weui-navbar__item.weui-bar__item_on{
     font-weight: 700;
