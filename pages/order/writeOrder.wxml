@@ -127,7 +127,7 @@
             <text>￥ </text>
             <text class="price_sty"> {{showPrice}}</text>
         </view>
-        <button class="page_hd_ch" style="position:fixed;right:10px;bottom:0px;" open-type="getUserInfo" bindgetuserinfo='to_insured' bindtap='go_zf'>
+        <button class="page_hd_ch" style="position:fixed;right:10px;bottom:0px;"  bindtap='go_zf'>
             去投保 >
         </button>
     </view>

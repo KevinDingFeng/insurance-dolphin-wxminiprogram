@@ -7,9 +7,9 @@ Page({
      * 页面的初始数据
      */
     data: {
-        price: 10,
-        foreignPrice: '20',
-        innerPrice: '10',
+        price: 15,
+        foreignPrice: '28',
+        innerPrice: '15',
         innerclasstype: '',
         foreignclasstype:'',
         tabs: ["国内", "国际"],
@@ -37,11 +37,11 @@ Page({
         let _activeIndex = this.data.activeIndex;
         if (_activeIndex == "1"){
             this.setData({
-                price: 20,
+                price: 28,
             });
         }else{
             this.setData({
-                price: 10,
+                price: 15,
             });
         }
         
