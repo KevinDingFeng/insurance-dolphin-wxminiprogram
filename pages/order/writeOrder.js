@@ -116,6 +116,7 @@ Page({
         wx.scanCode({
             scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
             success: function (res) {
+              console.log(res);
                 that.setData({
                     passResult: res.result,
                 })
@@ -137,7 +138,14 @@ Page({
                     arrCityCode: endCity,
                 })
                 that.scanGetCity();
-            }
+            },
+             fail: function (res){
+               wx.showToast({
+                 title: '扫描失败，请手动输入',
+                 icon: 'none',
+                 duration: 2000
+               })
+             }
         })
     },
     scanGetCity: function (e) {
@@ -170,32 +178,32 @@ Page({
             },
             data: { 'depCity': that.data.depCity, 'arrCity': that.data.arrCity },
             success: function (res) {
+              if(res!= null){
                 var city_class = that.data.classtype;
-                console.log(res);
                 that.setData({
-                    total_fee: res.data.data.total_fee,
-                    showPrice: res.data.data.total_fee,
-                    classtype: res.data.data.classtype
+                  total_fee: res.data.data.total_fee,
+                  showPrice: res.data.data.total_fee,
+                  classtype: res.data.data.classtype
                 })
+                console.log(city_class);
                 if (city_class != that.data.classtype) {
-                    console.log('类型不相等');
-                    if (that.data.classestype == '1') {
-                        wx.showToast({
-                            title: '此航班为国内航班，价格为国内航班行李险价格！',
-                            icon: 'none',
-                            duration: 2000
-                        })
-                    } else {
-                        wx.showToast({
-                            title: '此航班为国际航班，价格为国际航班行李险价格！',
-                            icon: 'none',
-                            duration: 2000
-                        })
-                    }
+                  console.log('类型不相等');
+                  if (that.data.classestype == '1') {
+                    wx.showToast({
+                      title: '此航班为国内航班，价格为国内航班行李险价格！',
+                      icon: 'none',
+                      duration: 3000
+                    })
+                  } else {
+                    wx.showToast({
+                      title: '此航班为国际航班，价格为国际航班行李险价格！',
+                      icon: 'none',
+                      duration: 3000
+                    })
+                  }
                 }
+              }   
             },
-
-
         })
     },
     //扫描获取用户输入的行李牌号码
