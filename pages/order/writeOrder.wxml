@@ -51,7 +51,7 @@
             <view class="peo_xx_left">日期</view>
             <view class="weui-cell__ft peo_xx_right">
                 <picker mode="date" value="{{flightDate}}" start="{{start}}" end="2999-12-12" bindchange="datePickerBindchange" bindtouchend='checkDate' class="_date" name="flightDate">
-                   <view class='time_data' bindblur='hb_time_Blur'>{{flightDate == null ? '请选择开始时间':start_time}}</view>
+                   <view class='time_data' bindblur='hb_time_Blur'>{{flightDate == null ? '请选择开始时间':flightDate}}</view>
                     
                 </picker>
             </view>

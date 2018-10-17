@@ -451,7 +451,7 @@ Page({
     // 表单手机号验证
     blurPhone: function (e) {
         var that = this;
-        var myreg = /^(((1[0-9][0-9]{1})+\d{8})$/;
+        var myreg = /^[1][0-9][0-9]{9}$/;//手机号码正则
         if (!myreg.test(e.detail.value)) {
             wx.showToast({
                 title: '手机号有误！',
@@ -636,7 +636,7 @@ Page({
             return;
         }
         //手机验证
-        var myreg = /^(((1[0-9][0-9]{1})+\d{8})$/;
+        var myreg = /^[1][0-9][0-9]{9}$/;//手机号码正则
         if (!myreg.test(_phone)){
             wx.showToast({
                 title: '手机号格式不正确！',
