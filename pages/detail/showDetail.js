@@ -8,8 +8,8 @@ Page({
      */
     data: {
         price: 10,
-        foreignPrice: '28',
-        innerPrice: '15',
+        foreignPrice: '20',
+        innerPrice: '10',
         innerclasstype: '',
         foreignclasstype:'',
         tabs: ["国内", "国际"],
@@ -37,11 +37,11 @@ Page({
         let _activeIndex = this.data.activeIndex;
         if (_activeIndex == "1"){
             this.setData({
-                price: 28,
+                price: 20,
             });
         }else{
             this.setData({
-                price: 15,
+                price: 10,
             });
         }
         
