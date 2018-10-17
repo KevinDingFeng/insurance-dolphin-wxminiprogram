@@ -35,14 +35,14 @@
     <view class="weui-cells weui-cells_after-title mar_tb">
         <view class="weui-cell">
             <view class='left_tiao'></view>
-            <view class='title_bx'>航班信息</view>
-            <view class="weui-cell__ft peo_xx_right title_sty">
+            <view class='title_bx left_cc'>航班信息</view>
+            <view class="weui-cell__ft peo_right title_sty" bindtap='scanFlight'>
                 扫登机牌可获取下述信息
-                <image src='../../images/s_s.png' bindtap='scanFlight'></image>
+                <image src='../../images/s_s.png' ></image>
             </view>
         </view>
         <view class="weui-cell">
-            <view class="peo_xx_left">航班号</view>
+            <view class="peo_xx_left ">航班号</view>
             <view class="weui-cell__ft peo_xx_right">
                 <input placeholder="请输入航班号" maxlength='6' class='_input' value='{{flightNo}}' name="flightNo"  bindblur='hb_num_Blur'/>
             </view>
@@ -74,10 +74,10 @@
     <view class="weui-cells weui-cells_after-title mar_tb">
         <view class="weui-cell">
             <view class='left_tiao'></view>
-            <view class='title_bx'>行李单信息</view>
-            <view class="weui-cell__ft peo_xx_right title_sty1">
+            <view class='title_bx  left_cc'>行李单信息</view>
+            <view class="weui-cell__ft peo_xx_right title_sty1" bindtap='scanPackage1'>
                 扫登机牌可获取下述信息
-                <image src='../../images/s_s.png' bindtap='scanPackage1'></image>
+                <image src='../../images/s_s.png' ></image>
             </view>
         </view>
         <view wx:for="{{xl_list}}" wx:for-item="item">

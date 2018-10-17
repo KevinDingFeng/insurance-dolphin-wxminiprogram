@@ -72,14 +72,17 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
 .peo_xx_right {
     width: 62%;
 }
+.left_cc{
+    width: 52% !important;
+}
 
 .title_sty {
-    width: 70% !important;
+    
     font-size: 20rpx;
 }
 
 .title_sty1 {
-    width: 65% !important;
+    width: 37% !important;
     font-size: 20rpx;
 }
 
