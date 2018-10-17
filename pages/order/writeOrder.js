@@ -193,58 +193,75 @@ Page({
   //获取价格
   getPrice: function (e) {
     var that = this;
-    wx.request({
-      url: config.baseUrl + '/customer/getFlight',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      data: { 'depCity': that.data.depCity, 'arrCity': that.data.arrCity },
-      success: function (res) {
-        if (res.data.data.total_fee != '00') {
-          var city_class = that.data.classtype;
-          that.setData({
-            total_fee: res.data.data.total_fee,
-            showPrice: res.data.data.total_fee,
-            classtype: res.data.data.classtype
-          })
-          console.log(city_class);
-          if (city_class != that.data.classtype) {
-            console.log('类型不相等');
-            if (that.data.classestype == '1') {
-              wx.showToast({
-                title: '此航班为国内航班，价格为国内航班行李险价格！',
-                icon: 'none',
-                duration: 3000
-              })
-            } else {
-              wx.showToast({
-                title: '此航班为国际航班，价格为国际航班行李险价格！',
-                icon: 'none',
-                duration: 3000
-              })
+    var _depCity = that.data.depCity;
+    var _arrCity = that.data.arrCity;
+    if (_depCity==""){
+      wx.showToast({
+        title: '请输入始发站！',
+        icon: 'none',
+        duration: 3000
+      })
+    } else if (_arrCity==""){
+      wx.showToast({
+        title: '请输入终点站！',
+        icon: 'none',
+        duration: 3000
+      })
+    }else{
+      wx.request({
+        url: config.baseUrl + '/customer/getFlight',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: { 'depCity': that.data.depCity, 'arrCity': that.data.arrCity },
+        success: function (res) {
+          if (res.data.data.total_fee != '00') {
+            var city_class = that.data.classtype;
+            that.setData({
+              total_fee: res.data.data.total_fee,
+              showPrice: res.data.data.total_fee,
+              classtype: res.data.data.classtype
+            })
+            console.log(city_class);
+            if (city_class != that.data.classtype) {
+              console.log('类型不相等');
+              if (that.data.classestype == '1') {
+                wx.showToast({
+                  title: '此航班为国内航班，价格为国内航班行李险价格！',
+                  icon: 'none',
+                  duration: 3000
+                })
+              } else {
+                wx.showToast({
+                  title: '此航班为国际航班，价格为国际航班行李险价格！',
+                  icon: 'none',
+                  duration: 3000
+                })
+              }
             }
+          } else if (res.data.data.total_fee == '00') {
+            wx.showToast({
+              title: '始发站不存在！',
+              icon: 'none',
+              duration: 3000
+            })
+            that.setData({
+              depCity: '',
+            })
+          } else {
+            wx.showToast({
+              title: '终点站不存在！',
+              icon: 'none',
+              duration: 3000
+            })
+            that.setData({
+              arrCity: '',
+            })
           }
-        } else if (res.data.data.total_fee == '00') {
-          wx.showToast({
-            title: '始发站不存在！',
-            icon: 'none',
-            duration: 3000
-          })
-          that.setData({
-            depCity: '',
-          })
-        } else {
-          wx.showToast({
-            title: '终点站不存在！',
-            icon: 'none',
-            duration: 3000
-          })
-          that.setData({
-            arrCity: '',
-          })
-        }
-      },
-    })
+        },
+      })
+    }
+   
   },
   //扫描获取用户输入的行李牌号码
   scanPackage1: function (event) {
