@@ -637,7 +637,7 @@ Page({
         }
         //手机验证
         var myreg = /^(((1[0-9][0-9]{1})+\d{8})$/;
-        if (!myreg.test(_phone){
+        if (!myreg.test(_phone)){
             wx.showToast({
                 title: '手机号格式不正确！',
                 icon: 'none',
