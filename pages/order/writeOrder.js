@@ -140,20 +140,29 @@ Page({
                         arr = arr.concat(dateList[i]);
                     }
                 }
+              if(arr[2]!=undefined){
                 var flight = arr[2] + arr[3];
                 var startCity = arr[2].substring(0, 3);
                 var endCity = arr[2].substring(3, 6);
                 var flightNum = flight.substring(6, 12);
                 that.setData({
-                    flightNo: flightNum,
-                    depCityCode: startCity,
-                    arrCityCode: endCity,
+                  flightNo: flightNum,
+                  depCityCode: startCity,
+                  arrCityCode: endCity,
                 })
                 that.scanGetCity();
+              }else{
+                wx.showToast({
+                  title: '二维码错误，请选择手动输入',
+                  icon: 'none',
+                  duration: 2000
+                })
+              }
+                
             },
              fail: function (res){
                wx.showToast({
-                 title: '扫描失败，请手动输入',
+                 title: '扫描失败，请选择手动输入',
                  icon: 'none',
                  duration: 2000
                })
@@ -190,7 +199,7 @@ Page({
             },
             data: { 'depCity': that.data.depCity, 'arrCity': that.data.arrCity },
             success: function (res) {
-              if(res!= null){
+              if (res.data.data.total_fee != '00'){
                 var city_class = that.data.classtype;
                 that.setData({
                   total_fee: res.data.data.total_fee,
@@ -214,7 +223,25 @@ Page({
                     })
                   }
                 }
-              }   
+              } else if (res.data.data.total_fee == '00'){
+                wx.showToast({
+                    title: '始发站不存在！',
+                    icon: 'none',
+                    duration: 3000
+                  })
+                  that.setData({
+                    depCity:'',
+                  })
+              }else{
+                wx.showToast({
+                  title: '终点站不存在！',
+                  icon: 'none',
+                  duration: 3000
+                })
+                that.setData({
+                  arrCity: '',
+                })
+              }  
             },
         })
     },
@@ -340,7 +367,6 @@ Page({
     peo_name_Blur: function (e) {
         let that =this;
         let _name = e.detail.value;
-        
         let _num = that.data.userInfo.user_num;//身份证号
         if (_name == "") {
             wx.showToast({
@@ -348,7 +374,7 @@ Page({
                 icon: 'none',
                 duration: 1500
             })
-            return
+            //return
         } else {
             that.setData({
                 userInfo:{
@@ -362,21 +388,34 @@ Page({
         let that = this;
         let _num = e.detail.value;
         let _name = that.data.userInfo.user_name;//姓名
-        if (_num == "") {
-            wx.showToast({
-                title: '身份证号不能为空！',
-                icon: 'none',
-                duration: 1500
-            })
-            return
-        } else {
-            that.setData({
-                userInfo: {
-                    user_name: _name,
-                    user_num: _num
-                }
-            })
+        //身份证正则校验
+        var p = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+        var factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+        var parity = [1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2];
+        var code = _num.substring(17);
+        if (!p.test(_num)) {
+          wx.showToast({
+            title: '身份证号格式不正确！',
+            icon: 'none',
+            duration: 1500
+          })
+        } else if (_num == "") {
+          wx.showToast({
+            title: '身份证号不能为空！',
+            icon: 'none',
+            duration: 1500
+          })
+          //return
+        }else {
+          that.setData({
+            userInfo: {
+              user_name: _name,
+              user_num: _num
+            }
+          })
         }
+        return false;
+        
     },
     //航班信息验证
     hb_num_Blur: function (e) {
@@ -388,12 +427,11 @@ Page({
                 icon: 'none',
                 duration: 1500
             })
-            return
-        } else {
+        } 
             that.setData({
                 flightNo: hb_num
             })
-        }
+        
     },
     hb_time_Blur: function (e) {
         let that = this;
@@ -590,7 +628,7 @@ Page({
         }  
         if (_num == ""){
             wx.showToast({
-                title: '身份证号不能为空！',
+                title: '身份证号有误！',
                 icon: 'none',
                 duration: 1500
             })
@@ -656,11 +694,24 @@ Page({
             })
             return;
         }
-        if (wx.getStorageSync('openId') != null) {
+      console.log(_cl_arr[0].pack1);
+      console.log(hb_num);
+      if (_name == "" && _num == "" && !myreg.test(_phone)&& hb_f == "" && hb_z == "" && hb_num == "" && hb_time == "" && hb_time == "" && 
+          _cl_arr[0].pack1 == "" == "" && _checked == false){
+            wx.showToast({
+              title: '完善表单信息!',
+              icon: 'none',
+              duration: 1500
+            })
+        }else{
+        console.log(_name);
+          if (wx.getStorageSync('openId') != null) {
             that.order(wx.getStorageSync('openId'));
-        } else {
+          } else {
             console.log('缓存数据中不存在openId');
+          }
         }
+          
     },
     go_back:function(){
         wx.navigateTo({
