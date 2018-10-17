@@ -108,7 +108,6 @@ Page({
             arrCity: e.detail.value
         })
     },
-
     //扫描获取航班号和城市的起点和终点
     scanFlight: function () {
         var that = this;
@@ -170,29 +169,31 @@ Page({
             },
             data: { 'depCity': that.data.depCity, 'arrCity': that.data.arrCity },
             success: function (res) {
+              if (res.data.data.total_fee != null && res.data.data.classtype!=null){
                 var city_class = that.data.classtype;
                 console.log(res);
                 that.setData({
-                    total_fee: res.data.data.total_fee,
-                    showPrice: res.data.data.total_fee,
-                    classtype: res.data.data.classtype
+                  total_fee: res.data.data.total_fee,
+                  showPrice: res.data.data.total_fee,
+                  classtype: res.data.data.classtype
                 })
                 if (city_class != that.data.classtype) {
-                    console.log('类型不相等');
-                    if (that.data.classestype == '1') {
-                        wx.showToast({
-                            title: '此航班为国内航班，价格为国内航班行李险价格！',
-                            icon: 'none',
-                            duration: 2000
-                        })
-                    } else {
-                        wx.showToast({
-                            title: '此航班为国际航班，价格为国际航班行李险价格！',
-                            icon: 'none',
-                            duration: 2000
-                        })
-                    }
+                  console.log('类型不相等');
+                  if (that.data.classestype == '1') {
+                    wx.showToast({
+                      title: '此航班为国内航班，价格为国内航班行李险价格！',
+                      icon: 'none',
+                      duration: 2000
+                    })
+                  } else {
+                    wx.showToast({
+                      title: '此航班为国际航班，价格为国际航班行李险价格！',
+                      icon: 'none',
+                      duration: 2000
+                    })
+                  }
                 }
+              } 
             },
 
 
