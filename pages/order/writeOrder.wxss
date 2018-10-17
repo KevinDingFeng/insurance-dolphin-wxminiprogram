@@ -41,6 +41,8 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
 }
 .time_data{
     margin-top: 25rpx;
+    font-size:26rpx;
+    color: #808080;
 }
 .peo_xx {
     display: flex;
@@ -184,4 +186,53 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
 }
 .page_hd{
     background-color: #2E66C3!important;
+}
+/* //遮盖层 */
+.fullbg {
+    height: 100%;
+    position: fixed;
+    background-color: rgb(1, 1, 1);
+    transition: all 2s;
+    opacity: 0;
+    display: none;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    z-index: 10;
+}
+.fullopacity {
+    opacity: 0.5;
+    display: block;
+}
+.go_cc{
+    display: block!important;
+}
+.go_success{
+    display: none;
+    position: fixed;
+    top: 30%;
+    left: 10%;
+    width: 80%;
+    z-index: 12;
+    background-color: #fff;
+    font-weight: 700;
+    border-radius: 10px;
+}
+
+.gx_back{
+    margin-bottom: 36rpx;
+    color: #2e66c3;
+}
+.gx_icon>icon{
+    margin-top: 49rpx;
+}
+.go_success>view{
+    text-align: center;
+}
+.gx_success{
+    font-size: 40rpx;
+    margin-top: 32rpx;
+    margin-bottom: 85rpx;
+    color: #222222;
+  
 }

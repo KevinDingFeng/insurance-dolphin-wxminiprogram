@@ -1,5 +1,5 @@
 <!--pages/order/writeOrder.wxml-->
-<view class='order_bg'>
+<view class='order_bg' style='{{paye_width}}'>
     <!-- 个人信息 -->
     <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">
@@ -51,9 +51,8 @@
             <view class="peo_xx_left">日期</view>
             <view class="weui-cell__ft peo_xx_right">
                 <picker mode="date" value="{{flightDate}}" start="{{start}}" end="2999-12-12" bindchange="datePickerBindchange" bindtouchend='checkDate' class="_date" name="flightDate">
-                    <view class='time_data'>
-                        <input placeholder="请输入当前日期" class='_input' value='{{flightDate}}' name="depCity"  bindblur='hb_time_Blur'/>
-                    </view>
+                   <view class='time_data' bindblur='hb_time_Blur'>{{flightDate == null ? '请选择开始时间':start_time}}</view>
+                    
                 </picker>
             </view>
         </view>
@@ -131,6 +130,14 @@
         <button class="page_hd_ch" style="position:fixed;right:10px;bottom:0px;" open-type="getUserInfo" bindgetuserinfo='to_insured' bindtap='go_zf'>
             去投保 >
         </button>
+    </view>
+    <view class="fullbg {{isfull ?'fullopacity':''}}" style='{{paye_width}}'  catchtouchmove="ture"></view> <!-- {{isfull ?'fullopacity':''}} -->
+    <view class="go_success {{isfull ?'go_cc':''}}" >
+            <view class='gx_icon'>
+                <icon type="success" size="42" color="#8e90fd"></icon>
+            </view>
+            <view class='gx_success'>恭喜您，支付成功</view>
+            <view class='gx_back' bindtap='go_back'>返回</view>
     </view>
 </view>
  <!-- <view>

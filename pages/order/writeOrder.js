@@ -8,7 +8,9 @@ Page({
      * 页面的初始数据
      */
     data: {
+        isfull: false,//背景遮盖层
         pageStyle: `width:${app.globalData.width};height:${app.globalData.height}`,
+        paye_width: `width: ${ app.globalData.width };`,
         xl_list: [
             {
                 id: "1",
@@ -37,7 +39,7 @@ Page({
         userName: '',
         userId: '',
         flightNo: '',//航班号
-        flightDate: '',//航班时间
+        flightDate: null,//航班时间
         depCity: '',//始发站
         arrCity: '',//终点站
         telNumber: '',
@@ -264,7 +266,7 @@ Page({
         
         let _num = 0;
         for (let i = 0; i < _cc.length; i++) {
-            if (p_inde != 0 && _cc[_p_inde].pack1 != ""){
+            if (p_inde != 0 && _cc[_p_inde].pack1 == ""){
                 that.setData({
                     xl_list: _cc,
                 })
@@ -449,7 +451,7 @@ Page({
     // 表单手机号验证
     blurPhone: function (e) {
         var that = this;
-        var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+        var myreg = /^(((1[0-9][0-9]{1})+\d{8})$/;
         if (!myreg.test(e.detail.value)) {
             wx.showToast({
                 title: '手机号有误！',
@@ -528,9 +530,12 @@ Page({
             'paySign': obj.data.paySign,
             'success': function (res) {
                 console.log('支付成功');
-                wx.navigateTo({
-                    url: '/pages/success/success'
+                that.setData({
+                    isfull: true,
                 })
+                // wx.navigateTo({
+                //     url: '/pages/success/success'
+                // })
             },
             'fail': function (res) {
                 console.log('支付失败');
@@ -564,6 +569,7 @@ Page({
         var that = this;
         let _name = that.data.userInfo.user_name;//姓名
         let _num = that.data.userInfo.user_num;//身份证号
+        let _phone = that.data.telNumber;//手机号
         let hb_f = that.data.depCity;//始发站
         let hb_z = that.data.arrCity;//终点站
         let hb_num = that.data.flightNo;//航班号
@@ -629,6 +635,16 @@ Page({
             })
             return;
         }
+        //手机验证
+        var myreg = /^(((1[0-9][0-9]{1})+\d{8})$/;
+        if (!myreg.test(_phone){
+            wx.showToast({
+                title: '手机号格式不正确！',
+                icon: 'none',
+                duration: 1500
+            })
+            return;
+        }
         //是否勾选《投保须知》
         if (_checked == false) {
             wx.showToast({
@@ -643,6 +659,11 @@ Page({
         } else {
             console.log('缓存数据中不存在openId');
         }
+    },
+    go_back:function(){
+        wx.navigateTo({
+            url: '/pages/index/index'
+        })
     },
     // formSubmit: function (e) {
     //     var that = this;
