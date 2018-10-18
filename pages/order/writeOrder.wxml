@@ -9,7 +9,7 @@
         <view class="weui-cell">
             <view class="peo_xx_left">姓名</view>
             <view class="weui-cell__ft peo_xx_right">
-                <input placeholder="请输入您的姓名" class='_input' name="userName" value='{{userInfo.user_name}}' data-cc='{{userInfo.user_name}}' bindblur='peo_name_Blur'/>
+                <input placeholder="请输入您的姓名" class='_input' name="userName" value='{{user_name}}' data-cc='{{user_name}}' bindblur='peo_name_Blur'/>
             </view>
         </view>
         <!-- <view class="weui-cell">
@@ -21,7 +21,7 @@
         <view class="weui-cell">
             <view class="peo_xx_left">身份证号</view>
             <view class="weui-cell__ft peo_xx_right">
-                <input placeholder="请输入身份证号" class='_input' name="userId" maxlength='18' value='{{userInfo.user_num}}' bindblur='peo_num_Blur'/>
+                <input placeholder="请输入身份证号" class='_input' name="userId" maxlength='18' value='{{user_num}}' bindblur='peo_num_Blur'/>
             </view>
         </view>
          <view class="weui-cell">

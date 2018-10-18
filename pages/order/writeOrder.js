@@ -31,10 +31,8 @@ Page({
             { name: '《投保须知》', value: '我同意', checked: false },
         ],
         //用户信息
-        userInfo: {
-            user_name: "",//姓名
-            user_num: "",//身份证号
-        },
+        user_name:"",
+        user_num:"",
         payInfo: {},
         //当前日期
         start: '',
@@ -299,7 +297,13 @@ Page({
         var that = this;
         let _cc = that.data.xl_list;
         let _val = e.detail.value;
+        let _index = e.currentTarget.dataset.index;//当前第几个
+       
         if (_val == "") {
+           _cc[_index].pack1="";
+            that.setData({
+                xl_list: _cc,
+            })
             wx.showToast({
                 title: '行李单号不能为空！',
                 icon: 'none',
@@ -307,7 +311,6 @@ Page({
             })
             return;
         }
-        let _index = e.currentTarget.dataset.index;//当前第几个
         let p_inde = parseInt(_index);
         let _p_inde = parseInt(_index)-1;
         let _num = 0;
@@ -321,43 +324,6 @@ Page({
             xl_list: _cc,
             showPrice: _num * that.data.total_fee,// 
         })
-        if (_p_inde == 0){
-            let _pack = _cc[0].pack1;
-            if (_pack == ""){
-                wx.showToast({
-                    title: '第一个行李单号不能为空！',
-                    icon: 'none',
-                    duration: 1500
-                })
-                _cc[_index].pack1 =""
-                that.setData({
-                    xl_list: _cc,
-                    showPrice:10
-                })
-                return;
-            }
-            
-        }else{
-            let _p_inde = p_inde-1;
-            let _pack = _cc[_p_inde].pack1;
-            if (_pack == "") {
-                wx.showToast({
-                    title: '上一个行李单号不能为空！',
-                    icon: 'none',
-                    duration: 1500
-                })
-                _cc[_index].pack1 = ""
-                that.setData({
-                    xl_list: _cc,
-                    showPrice: 10
-                })
-                return;
-            }
-           
-        }
-
-
-       
         // this.setData({
         //     pack1: e.detail.value
         // })
@@ -397,7 +363,7 @@ Page({
     peo_name_Blur: function (e) {
         let that = this;
         let _name = e.detail.value;
-        let _num = that.data.userInfo.user_num;//身份证号
+        let _num = that.data.user_num;//身份证号
         if (_name == "") {
             wx.showToast({
                 title: '姓名不能为空！',
@@ -407,17 +373,14 @@ Page({
             //return
         } else {
             that.setData({
-                userInfo: {
-                    user_name: _name,
-                    user_num: _num
-                }
+                user_name: _name,
             })
         }
     },
     peo_num_Blur: function (e) {
         let that = this;
         let _num = e.detail.value;
-        let _name = that.data.userInfo.user_name;//姓名
+        let _name = that.data.user_name;//姓名
         //身份证正则校验
         var p = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
         var factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
@@ -438,10 +401,7 @@ Page({
             //return
         } else {
             that.setData({
-                userInfo: {
-                    user_name: _name,
                     user_num: _num
-                }
             })
         }
         return false;
@@ -562,7 +522,11 @@ Page({
             _obj = {
                 mark: _arr[i].pack1
             }
-            c_arr.push(_obj)
+            if (_obj.mark == ""){
+
+            }else{
+                c_arr.push(_obj)
+            }
         }
         wx.request({
             url: config.baseUrl + '/pay/order',
@@ -637,8 +601,8 @@ Page({
     //去投保
     go_zf: function (e) {
         var that = this;
-        let _name = that.data.userInfo.user_name;//姓名
-        let _num = that.data.userInfo.user_num;//身份证号
+        let _name = that.data.user_name;//姓名
+        let _num = that.data.user_num;//身份证号
         let _phone = that.data.telNumber;//手机号
         let hb_f = that.data.depCity;//始发站
         let hb_z = that.data.arrCity;//终点站
