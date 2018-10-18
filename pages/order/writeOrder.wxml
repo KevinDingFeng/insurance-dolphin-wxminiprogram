@@ -83,7 +83,7 @@
             <view class="weui-cell">
                 <view class="peo_xx_left">{{item.name}}</view>
                 <view class="weui-cell__ft peo_xx_right">
-                    <input placeholder="请输入行李单号" data-index="{{item.id}}" class='_input' name="mark1" value="{{item.pack1}}" bindblur='p1blur' />
+                    <input placeholder="请输入行李单号" data-index="{{index}}" class='_input' name="mark1" value="{{item.pack1}}" bindblur='p1blur' />
                 </view>
             </view>
         </view>
