@@ -139,16 +139,20 @@ Page({
                         arr = arr.concat(dateList[i]);
                     }
                 }
+                
                 if (arr[2] != undefined) {
+                  
                     var flight = arr[2] + arr[3];
                     var startCity = arr[2].substring(0, 3);
                     var endCity = arr[2].substring(3, 6);
                     var flightNum = flight.substring(6, 12);
+                  console.log('航班信息截取成功');
                     that.setData({
                         flightNo: flightNum,
                         depCityCode: startCity,
                         arrCityCode: endCity,
                     })
+                    
                     that.scanGetCity();
                 } else {
                     wx.showToast({
@@ -168,25 +172,35 @@ Page({
             }
         })
     },
-    scanGetCity: function (e) {
-        let that = this;
-        wx.request({
-            url: config.baseUrl + '/customer/getFlight',
-            header: {
-                'content-type': 'application/x-www-form-urlencoded'
-            },
-            data: { 'depCityCode': that.data.depCityCode, 'arrCityCode': that.data.arrCityCode, 'cityType': that.data.classtype },
-            success: function (res) {
-                console.log(res);
-                that.setData({
-                    depCity: res.data.data.depCity,
-                    arrCity: res.data.data.arrCity,
-                    // total_fee: res.data.data.total_fee,
-                })
-            },
+  scanGetCity: function (e) {
+    let that = this;
+    console.log('根据扫描结果获取城市');
+    wx.request({
+      url: config.baseUrl + '/customer/getFlight',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: { 'depCityCode': that.data.depCityCode, 'arrCityCode': that.data.arrCityCode, 'cityType': that.data.classtype },
+      success: function (res) {
+        console.log(res);
+        if (res.data.data.total_fee == '00' || res.data.data.total_fee == '01') {
+          wx.showToast({
+            title: '二维码错误，请选择手动输入',
+            icon: 'none',
+            duration: 2000
+          })
+        } else {
+          that.setData({
+            depCity: res.data.data.depCity,
+            arrCity: res.data.data.arrCity,
+            total_fee: res.data.data.total_fee,
+            classtype: res.data.data.classtype
+          })
+        }
+      },
 
-        })
-    },
+    })
+  },
 
     //获取价格
     getPrice: function (e) {
@@ -213,7 +227,8 @@ Page({
                 },
                 data: { 'depCity': that.data.depCity, 'arrCity': that.data.arrCity },
                 success: function (res) {
-                    if (res.data.data.total_fee != '00') {
+                  if (res.data.data.total_fee != '00' & res.data.data.total_fee != '01') {
+                    console.log('城市结果返回');
                         var city_class = that.data.classtype;
                         that.setData({
                             total_fee: res.data.data.total_fee,
@@ -364,7 +379,8 @@ Page({
         let that = this;
         let _name = e.detail.value;
         let _num = that.data.user_num;//身份证号
-        if (_name == "") {
+      console.log(_name.length);
+      if (_name == "") {
             wx.showToast({
                 title: '姓名不能为空！',
                 icon: 'none',
@@ -381,12 +397,8 @@ Page({
         let that = this;
         let _num = e.detail.value;
         let _name = that.data.user_name;//姓名
-        //身份证正则校验
-        var p = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
-        var factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
-        var parity = [1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2];
-        var code = _num.substring(17);
-        if (!p.test(_num)) {
+        var sf_reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/; //身份证号
+        if (!sf_reg.test(_num)) {
             wx.showToast({
                 title: '身份证号格式不正确！',
                 icon: 'none',
@@ -535,8 +547,8 @@ Page({
             },
             data: {
                 'openid': openId,
-                'applyname': that.data.userInfo.user_name,
-                'applycardcode': that.data.userInfo.user_num,
+                'applyname': that.data.user_name,
+                'applycardcode': that.data.user_num,
                 'saildate': that.data.flightDate,
                 'voyno': that.data.flightNo,
                 'startport': that.data.depCity,
@@ -690,7 +702,7 @@ Page({
         }
         console.log(_cl_arr[0].pack1);
         console.log(hb_num);
-        if (_name == "" && _num == "" && !myreg.test(_phone) && hb_f == "" && hb_z == "" && hb_num == "" && hb_time == "" && hb_time == "" &&
+      if (_name == "" && !sf_reg.test(_num)&& !myreg.test(_phone) && hb_f == "" && hb_z == "" && hb_num == "" && hb_time == "" && hb_time == "" &&
             _cl_arr[0].pack1 == "" == "" && _checked == false) {
             wx.showToast({
                 title: '完善表单信息!',
