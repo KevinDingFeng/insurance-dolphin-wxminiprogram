@@ -701,11 +701,11 @@ Page({
             return;
         }
         console.log(_cl_arr[0].pack1);
-        console.log(hb_num);
-      if (_name == "" && !sf_reg.test(_num)&& !myreg.test(_phone) && hb_f == "" && hb_z == "" && hb_num == "" && hb_time == "" && hb_time == "" &&
-            _cl_arr[0].pack1 == "" == "" && _checked == false) {
+      console.log(hb_time == null);
+      if (_name == "" || !sf_reg.test(_num)|| !myreg.test(_phone) || hb_f == "" || hb_z == "" || hb_num == "" || hb_time == "" || hb_time ==null ||
+            _cl_arr[0].pack1 == ""  || _checked == false) {
             wx.showToast({
-                title: '完善表单信息!',
+                title: '请完善表单信息!',
                 icon: 'none',
                 duration: 1500
             })
