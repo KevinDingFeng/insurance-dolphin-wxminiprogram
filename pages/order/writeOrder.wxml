@@ -1,5 +1,5 @@
 <!--pages/order/writeOrder.wxml-->
-<view class='order_bg' style='{{paye_width}}'>
+<view class='order_bg' style='{{pageStyle}}'>
     <!-- 个人信息 -->
     <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">
