@@ -190,6 +190,8 @@ Page({
             duration: 2000
           })
         } else {
+          console.log(res.data.data.depCity);
+          console.log(res.data.data.arrCity);
           that.setData({
             depCity: res.data.data.depCity,
             arrCity: res.data.data.arrCity,
@@ -228,7 +230,8 @@ Page({
         data: { 'depCity': that.data.depCity, 'arrCity': that.data.arrCity },
         success: function (res) {
           if (res.data.data.total_fee != '00' & res.data.data.total_fee != '01') {
-            console.log('城市结果返回');
+            console.log('城市结果返回' + res.data.data.total_fee);
+            
             var city_class = that.data.classtype;
             that.setData({
               total_fee: res.data.data.total_fee,
