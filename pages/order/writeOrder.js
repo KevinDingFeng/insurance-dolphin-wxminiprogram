@@ -448,18 +448,9 @@ Page({
   hb_time_Blur: function (e) {
     let that = this;
     let hb_time = e.detail.value;//航班时间
-    if (hb_time == "") {
-      wx.showToast({
-        title: '航班日期不能为空！',
-        icon: 'none',
-        duration: 1500
-      })
-      return
-    } else {
       that.setData({
         flightDate: hb_time
       })
-    }
   },
   hb_sf_Blur: function (e) {
     let that = this;
