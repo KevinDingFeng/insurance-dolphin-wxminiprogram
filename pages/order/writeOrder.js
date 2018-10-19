@@ -244,7 +244,7 @@ Page({
             console.log(city_class);
             if (city_class != that.data.classtype) {
               console.log('类型不相等');
-              if (that.data.classestype == '1') {
+              if (res.data.data.classtype == '1') {
                 wx.showToast({
                   title: '此航班为国内航班，价格为国内航班行李险价格！',
                   icon: 'none',
