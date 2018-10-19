@@ -712,7 +712,7 @@ Page({
     }
     console.log(_cl_arr[0].pack1);
     console.log(hb_time == null);
-    if (_name == "" || !sf_reg.test(_num) || !myreg.test(_phone) || hb_f == "" || hb_z == "" || hb_num == "" || hb_time == "" || hb_time == null ||
+    if (_name == "" || !sf_reg.test(_num) || !myreg.test(_phone) || hb_f == "" || hb_z == "" || hb_num == ""||
       _cl_arr[0].pack1 == "" || _checked == false) {
       wx.showToast({
         title: '请完善表单信息!',
