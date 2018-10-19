@@ -319,11 +319,22 @@ Page({
     let _cc = that.data.xl_list;
     let _val = e.detail.value;
     let _index = e.currentTarget.dataset.index;//当前第几个
-
+    let _num_cc = 1;
     if (_val == "") {
       _cc[_index].pack1 = "";
+      for (var i = 0; i < _cc.length; i++) {
+        if (_cc[i].pack1 == "") {
+          _num_cc = _num_cc - 1;
+        } else {
+          _num_cc = _num_cc + 1;
+        }
+      }
+      if (_num_cc <= 0) {
+        _num_cc = 1;
+      }
       that.setData({
         xl_list: _cc,
+        showPrice: _num_cc * that.data.total_fee,// 
       })
       wx.showToast({
         title: '行李单号不能为空！',
@@ -344,45 +355,10 @@ Page({
       }
 
     }
-    console.log(_num);
     that.setData({
       xl_list: _cc,
       showPrice: _num * that.data.total_fee,// 
     })
-    // this.setData({
-    //     pack1: e.detail.value
-    // })
-    // if (e.detail.value != '') {
-    //     this.setData({
-    //         pNo1: 1 
-    //     })
-    //     var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
-    //     that.setData({
-    //         packNum: num,
-    //     })
-    //     that.setData({
-    //         showPrice: that.data.packNum * that.data.total_fee,
-    //     })
-
-    // } else {
-    //     this.setData({
-    //         pNo1: 0
-    //     })
-    //     var num = parseInt(that.data.pNo1) + parseInt(that.data.pNo2) + parseInt(that.data.pNo3) + parseInt(that.data.pNo4) + parseInt(that.data.pNo5);
-    //     if (num == 0) {
-    //         that.setData({
-    //             packNum: 1,
-    //         })
-    //     } else {
-    //         that.setData({
-    //             packNum: num,
-    //         })
-    //     }
-
-    //     that.setData({
-    //         showPrice: that.data.packNum * that.data.total_fee,
-    //     })
-    // }
   },
   //个人信息验证
   peo_name_Blur: function (e) {
