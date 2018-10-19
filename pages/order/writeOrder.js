@@ -223,7 +223,7 @@ Page({
       })
     } else {
       wx.request({
-        url: config.baseUrl + '/customer/getFlight',
+        url: config.baseUrl + '/customer/getPrice',
         header: {
           'content-type': 'application/x-www-form-urlencoded'
         },
@@ -231,12 +231,15 @@ Page({
         success: function (res) {
           if (res.data.data.total_fee != '00' & res.data.data.total_fee != '01') {
             console.log('城市结果返回' + res.data.data.total_fee);
-            
+            console.log('城市结果返回' + res.data.data.arrCity);
+            console.log('城市结果返回' + res.data.data.depCity);
             var city_class = that.data.classtype;
             that.setData({
               total_fee: res.data.data.total_fee,
               showPrice: res.data.data.total_fee,
-              classtype: res.data.data.classtype
+              classtype: res.data.data.classtype,
+              depCity: res.data.data.depCity,
+              arrCity: res.data.data.arrCity,
             })
             console.log(city_class);
             if (city_class != that.data.classtype) {
