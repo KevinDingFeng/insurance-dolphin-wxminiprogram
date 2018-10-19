@@ -74,8 +74,8 @@
         <view class="weui-cell">
             <view class='left_tiao'></view>
             <view class='title_bx  left_cc'>行李单信息</view>
-            <view class="weui-cell__ft peo_xx_right title_sty1" bindtap='scanPackage1'>
-                扫登机牌可获取下述信息
+            <view class="weui-cell__ft peo_xx_right title_sty2" bindtap='scanPackage1'>
+                扫行李单可获取下述信息
                 <image src='../../images/s_s.png' ></image>
             </view>
         </view>
