@@ -93,7 +93,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
     font-size: 20rpx;
 }
 .title_sty2 {
-    width: 39% !important;
+    width: 37.5% !important;
     font-size: 20rpx;
 }
 .title_sty2>image {
