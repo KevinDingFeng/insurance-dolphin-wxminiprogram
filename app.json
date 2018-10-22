@@ -3,12 +3,15 @@
     "pages/index/index",
     "pages/order/writeOrder",
     "pages/detail/showDetail",
-    "pages/instructions/instructions"
+    "pages/instructions/instructions",
+    "pages/problem/problem",
+    "pages/protocol/protocol",
+    "pages/notice/notice"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "飞行行李险",
+    "navigationBarTitleText": "航空保险保障",
     "navigationBarTextStyle": "black"
   }
 
