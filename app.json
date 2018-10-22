@@ -4,7 +4,6 @@
     "pages/order/writeOrder",
     "pages/detail/showDetail",
     "pages/logs/logs",
-    "pages/success/success",
     "pages/instructions/instructions"
   ],
   "window": {
