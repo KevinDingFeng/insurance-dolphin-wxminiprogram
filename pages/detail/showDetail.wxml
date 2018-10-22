@@ -34,7 +34,8 @@
                     <view>
                         <view class="weui-cells weui-cells_after-title">
                             <view class="weui-cell">
-                                <view class='title_bx'>保障详情</view>
+                                <view class='weui-cell__bd  title_bx'>保障详情</view>
+                                <view class="weui-cell__ft title_bx">保险金额</view>
                             </view>    
                             <view class="weui-cell">
                                 <view class="weui-cell__bd">国内托运行李意外丢失最高赔付</view>
@@ -46,11 +47,11 @@
                             </view>
                             <view class="weui-cell">
                                 <view class="weui-cell__bd">国内托运行李箱体损失赔付</view>
-                                <view class="weui-cell__ft">200元</view>
+                                <view class="weui-cell__ft">100元</view>
                             </view>
                             <view class="weui-cell">
-                                <view class="weui-cell__bd">国内行李迟运赔付</view>
-                                <view class="weui-cell__ft">100元</view>
+                                <view class="weui-cell__bd">国内托运行李迟运赔付</view>
+                                <view class="weui-cell__ft">150元</view>
                             </view>
                         </view>
                     </view>
@@ -81,7 +82,8 @@
                     <view>
                         <view class="weui-cells weui-cells_after-title">
                             <view class="weui-cell">
-                                <view class='title_bx'>保障详情</view>
+                                <view class='weui-cell__bd  title_bx'>保障详情</view>
+                                <view class="weui-cell__ft title_bx">保险金额</view>
                             </view>
                             <view class="weui-cell">
                                 <view class="weui-cell__bd">国际托运行李意外丢失最高赔付</view>
@@ -89,15 +91,15 @@
                             </view>
                             <view class="weui-cell">
                                 <view class="weui-cell__bd">国际托运行李损失保障赔付</view>
-                                <view class="weui-cell__ft">2000元</view>
+                                <view class="weui-cell__ft">1000元</view>
                             </view>
                             <view class="weui-cell">
                                 <view class="weui-cell__bd">国际托运行李箱体损失赔付</view>
-                                <view class="weui-cell__ft">300元</view>
+                                <view class="weui-cell__ft">150元</view>
                             </view>
                             <view class="weui-cell">
-                                <view class="weui-cell__bd">国际行李迟运赔付</view>
-                                <view class="weui-cell__ft">300元</view>
+                                <view class="weui-cell__bd">国际托运行李迟运赔付</view>
+                                <view class="weui-cell__ft">150元</view>
                             </view>
                         </view>
                     </view>
@@ -109,6 +111,15 @@
             </view>
         </view>
     </view>
+     <!-- 常见问题 -->
+    <view class='mar_sx'>
+       <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell" bindtap='go_problem'>
+                <view class="weui-cell__bd">常见问题</view>
+                <view class="weui-cell__ft">></view>
+            </view>
+        </view>
+    </view> 
     <view class="page_hd">
         <view class='price_cc'>
             <text>￥ </text>

@@ -1,0 +1,100 @@
+<!--pages/protocol/protocol.wxml-->
+<view class='text_sty'>
+    <view class='text_title'>航空旅客行李保险条款</view>
+    <view class='text_title'>保险标的</view>
+    <view class='mar_left'>
+        <view class='text_size'>第一条<text class="text_size1">  在航空运输中，旅客所托运的行李均可为保险标的。</text> </view>
+    </view>
+    <view class='mar_left'>
+        <view class='text_size'>第二条<text class="text_size1 fon_w">  下列物品不在本保险标的范围内：危险物品、货币、有价证券、票证、邮票、纪念币、金银制品、首饰、珠宝、钻石、玉器、古书、古玩、字画、艺术品、文件、帐册、技术资料、图表、动物、植物等其他不易或无法鉴定价值的物品。</text> </view>
+    </view>
+    <view class='text_title'>保险责任</view>
+    <view class='mar_left'>
+        <view class='text_size'>第三条<text class="text_size1"> 在保险期间内，下列原因造成保险行李的直接损失，保险人负责赔偿：</text> </view>
+    </view>
+    <view class='text_size1'>1、飞机遭受碰撞、倾覆、坠落、失踪（在三个月以上），在危难中发生卸载以及遭受恶劣气候或其他危难事故时发生抛弃行为；</view>
+    <view class='text_size1'>2、受震动、碰撞、挤压而造成行李的破碎、弯曲、凹瘪、折断、开裂；</view>
+    <view class='text_size1'>3、行李遭受雨淋；</view>
+    <view class='text_size1'>4、由于非包装不善原因的包装破裂所致的行李散失；</view>
+    <view class='text_size1'>5、行李遭受外来的、有明显痕迹的盗窃；</view>
+    <view class='text_size1'>6、行李丢失。</view>
+
+    <view class='text_title'>责任免除</view>
+    <view class='mar_left'>
+        <view class='text_size'>第四条<text class="text_size1 fon_w">  下列原因造成保险行李的损失，保险人不负赔偿责任：</text> </view>
+    </view>
+    <view class='text_size1 fon_w'>1、行李内物品的自然损耗、本身的缺陷和自然特性；</view>
+    <view class='text_size1 fon_w'>2、在保险责任开始前，行李内物品已存在的品质不良或数量短差；</view>
+    <view class='text_size1 fon_w'>3、因包装不善导致的行李散失或损毁；</view>
+    <view class='text_size1 fon_w'>4、被保险人的故意行为或违法犯罪行为；</view>
+    <view class='text_size1 fon_w'>5、战争、军事行动、扣押、罢工、哄抢和暴动；</view>
+    <view class='text_size1 fon_w'>6、核反应、核子幅射和放射性污染；</view>
+    <view class='text_size1 fon_w'>7、行政行为或司法行为；</view>
+    <view class='text_size1 fon_w'>8、其它不属于保险责任范围内的损失。</view>
+    <view class='text_title'>保险期间</view>
+    <view class='mar_left'>
+        <view class='text_size'>第五条<text class="text_size1 ">保险期间自保险行李经承运人收讫、保险人签发保险单（凭证）时起，至被保险人离开本次运输工具并从承运人处领取到或应当领取到行李时终止。</text> </view>
+    </view>
+    <view class='text_title'>投保人、被保险人义务</view>
+    <view class='mar_left'>
+        <view class='text_size'>第六条<text class="text_size1 ">投保人应履行如实告知义务，如实回答保险人就保险标的或者被保险人的有关情况提出的询问。</text> </view>
+        <view>投保人故意或者因重大过失未履行前款规定的如实告知义务，足以影响保险人决定是否同意承保或者提高保险费率的，保险人有权解除合同。保险合同自保险人的解约通知书到达投保人或被保险人时解除。</view>
+        <view class="fon_w">投保人故意不履行如实告知义务的，保险人对于保险合同解除前发生的保险事故，不承担赔偿或者给付保险金的责任，并不退还保险费。 </view>
+        <view class="fon_w">投保人因重大过失未履行如实告知义务，对保险事故的发生有严重影响的，保险人对于保险合同解除前发生的保险事故，不承担赔偿责任，但应当退还保险费。</view>
+    </view>
+    <view class='mar_left'>
+        <view class='text_size'>第七条<text class="text_size1 ">投保人在投保时，应一次性交清保险费。<text class="fon_w">投保人未按约定交清保险费的，本保险合同不生效，保险人不承担赔偿责任。</text></text> </view>
+    </view>
+    <view class='mar_left'>
+        <view class='text_size'>第八条<text class="text_size1 ">被保险人应当严格遵守国家及交通运输部门关于安全运输的各项规定，还应当接受并协助保险人对保险行李进行的查验防损工作，行李运输包装必须符合国家和主管部门规定的标准。</text> </view>
+        <view class='fon_w'>对于因被保险人未遵守上述约定而导致保险事故的，保险人不负赔偿责任；对于因被保险人未遵守上述约定而导致损失扩大的，保险人对扩大的损失不负赔偿责任。</view>
+    </view>
+    <view class='mar_left'>
+        <view class='text_size'>第九条<text class="text_size1 ">在保险期间内，保险标的危险程度显著增加的，被保险人应当按照合同约定及时通知保险人，保险人有权要求增加保险费或者解除合同。</text> </view>
+        <view class='fon_w'>被保险人未履行前款规定的通知义务的，因保险标的危险程度显著增加而发生的保险事故，保险人不承担赔偿责任。</view>
+    </view>
+    <view class='mar_left'>
+        <view class='text_size'>第十条<text class="text_size1 ">保险行李发生保险责任范围内的损失时，投保人或被保险人获悉后，应迅速采取施救和保护措施并立即通知保险人的当地机构。</text> </view>
+        <view class='fon_w'>故意或者因重大过失未及时通知，致使保险事故的性质、原因、损失程度等难以确定的，保险人对无法确定的部分，不承担赔偿责任，但保险人通过其他途径已经及时知道或者应当及时知道保险事故发生的除外。</view>
+    </view>
+    <view class='text_title'>赔偿处理</view>
+    <view class='mar_left'>
+        <view class='text_size2'>第十一条<text class="text_size1 ">保险行李发生保险责任范围内的损失时，保险人应依照物品的发票价或重置价在保险金额内按实际损失进行赔偿，但以不超过保单上注明的保险金额为限。</text> </view>
+    </view>
+    <view class='mar_left'>
+        <view class='text_size2'>第十二条<text class="text_size1 ">保险行李发生保险责任范围内的损失时，投保人或被保险人在获悉损失后必须在48小时内通知保险人。被保险人本人或委托投保人（以下简称“索赔人”）向保险人申请索赔时，必须提供下列单证：</text> </view>
+    </view>
+    <view class='text_size1'>1、保险单（凭证）、机票；</view>
+    <view class='text_size1'>2、承运部门出具的事故证明；</view>
+    <view class='text_size1'>3、物品损失清单；</view>
+    <view class='text_size1'>4、被保险人身份证或护照正本及复印件一份</view>
+    <view class='text_size1'>5、索赔人所能提供的与确认保险事故的性质、原因、损失程度等有关的其他证明和资料。
+    保险人认为有关索赔的证明和资料不完整的，应当及时一次性通知索赔人补充提供。</view>
+    <view class='mar_left'>
+        <view class='text_size2'>第十三条<text class="text_size1 ">保险标的遭受损失后，如果有残余价值，应由双方协商处理。如折归被保险人，由双方协商确定其价值，并在保险赔款中扣除。</text> </view>
+    </view>
+     <view class='mar_left'>
+        <view class='text_size2'>第十四条<text class="text_size1 ">保险事故发生时，如果存在重复保险，保险人按照本合同的相应保险金额与其他保险合同及本合同相应保险金额总和的比例承担赔偿责任。</text> </view>
+        <text class='fon_w'>其他保险人应承担的赔偿金额，本保险人不负责垫付。</text><text>若被保险人未如实告知导致保险人多支付赔偿金的，保险人有权向被保险人追回多支付的部分。</text>
+    </view>
+    <view class='mar_left'>
+        <view class='text_size2'>第十五条<text class="text_size1 ">被盗抢或丢失的行李物品，如在保险人赔偿后被追回，归保险人所有。被保险人如愿意收回被追回的物品，已经领取的保险赔款须退还保险人，保险人对被追回物品的损毁部分在保险金额内按实际损失进行赔偿。</text> </view>
+    </view>
+    <view class='mar_left'>
+        <view class='text_size2'>第十六条<text class="text_size1 ">发生保险责任范围内的损失，应由有关责任方负责赔偿的，保险人自向被保险人赔偿保险金之日起，在赔偿金额范围内代位行使被保险人对有关责任方请求赔偿的权利，被保险人应当向保险人提供必要的文件和所知道的有关情况。</text> </view>
+        <text class='fon_w'>被保险人已经从有关责任方取得赔偿的，保险人赔偿保险金时，可以相应扣减被保险人已从有关责任方取得的赔偿金额。</text>
+        <view class='fon_w'>保险事故发生后，在保险人未赔偿保险金之前，被保险人放弃对有关责任方请求赔偿权利的，保险人不承担赔偿责任；</view>
+        <text>保险人向被保险人赔偿保险金后，被保险人未经保险人同意放弃对有关责任方请求赔偿权利的，该行为无效；</text>
+        <text class='fon_w'>由于被保险人故意或者因重大过失致使保险人不能行使代位请求赔偿的权利的，保险人可以扣减或者要求返还相应的保险金。</text>
+    </view>
+    <view class='mar_left'>
+        <view class='text_size2'>第十七条<text class="text_size1 ">被保险人向保险人请求赔偿保险金的诉讼时效期间为二年，自其知道或者应当知道保险事故发生之日起计算。</text> </view>
+    </view>
+    <view class='text_title'>争议处理和法律适用</view>
+    <view class='mar_left'>
+        <view class='text_size2'>第十八条<text class="text_size1 ">因履行本合同发生的争议，由当事人协商解决。协商不成的，提交保险单（凭证）载明的仲裁机构仲裁；保险单（凭证）未载明仲裁机构且争议发生后未达成仲裁协议的，依法向人民法院起诉。</text> </view>
+    </view>
+    <view class='mar_left'>
+        <view class='text_size2'>第十九条<text class="text_size1 ">与本合同有关的以及履行本合同产生的一切争议，适用中华人民共和国法律（不包括港澳台地区法律）。</text> </view>
+    </view>
+</view>

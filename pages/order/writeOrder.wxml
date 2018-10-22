@@ -114,12 +114,13 @@
     </view> -->
     <!-- 投保信息 -->
     <view class="weui-cells weui-cells_after-title mar_tb bg_none" style='margin-bottom:130rpx;'>
-        <checkbox-group bindchange="checkboxChange" >
+        <checkbox-group class="row_flex" >
             <label class="checkbox" wx:for="{{items}}"  wx:for-item="item">
-                <checkbox value='{{item.checked}}'  checked="{{item.checked}}"/>{{item.value}}
-                <a class="xy_sty" href="#">{{item.name}}</a>
+                <checkbox bindchange="checkboxChange"  value='{{item.checked}}'  checked="{{item.checked}}"/>我同意
             </label>
+            <a class="xy_sty" href="#"  bindtap="go_notice">《投保须知》</a><text style='font-size:24rpx;'>和</text><a class="xy_sty" href="#" bindtap="go_protocol">《投保条款》</a>
         </checkbox-group>
+        
     </view>
     <!-- 去支付 -->
     <view class="page_hd ">

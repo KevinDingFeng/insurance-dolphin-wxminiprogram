@@ -1,0 +1,18 @@
+/* pages/notice/notice.wxss */
+.text_sty{
+    height: 100%;
+    margin: 23rpx;
+    line-height:60rpx;
+}
+.text_size1{
+    font-size: 28rpx;
+    font-weight: 700;
+    text-indent:1.4em;
+}
+.text_size{
+    font-size: 26rpx;
+    text-indent:1.4em;
+}
+.a_cc{
+    color:#2e66c3;
+}

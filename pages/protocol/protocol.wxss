@@ -1,0 +1,39 @@
+/* pages/protocol/protocol.wxss */
+.text_sty{
+    height: 100%;
+    margin: 23rpx;
+    line-height:60rpx;
+    font-size: 26rpx;
+}
+.text_title{
+    font-size: 32rpx;
+    font-weight: 700;
+    text-align: center;
+}
+.cen_sty{
+    display: flex;
+    flex-direction: row;
+    font-size: 26rpx;
+}
+.text_size{
+    font-size: 26rpx;
+    font-weight: 700;
+}
+
+.text_size1{
+    margin-left: 10px;
+    font-weight: normal;
+}
+.text_size2{
+    font-size: 26rpx;
+    font-weight: normal;
+}
+.a_cc{
+    color:#2e66c3;
+}
+.mar_left{
+    margin-left: 25rpx;
+}
+.fon_w{
+    font-weight: 700;
+}

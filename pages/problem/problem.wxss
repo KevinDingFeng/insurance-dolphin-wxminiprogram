@@ -1,0 +1,14 @@
+/* pages/problem/problem.wxss */
+.text_sty{
+    height: 100%;
+    margin: 23rpx;
+    line-height:60rpx;
+}
+.text_title{
+    font-size: 32rpx;
+    font-weight: 700;
+}
+.text_size{
+    font-size: 28rpx;
+    text-indent:1.6em;
+}

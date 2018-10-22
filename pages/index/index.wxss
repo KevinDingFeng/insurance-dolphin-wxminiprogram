@@ -30,6 +30,6 @@
 .company{
     text-align: center;
     color: #b1b1b1;
-    font-size: 28rpx;
+    font-size: 24rpx;
     margin-top: 90rpx;
 }

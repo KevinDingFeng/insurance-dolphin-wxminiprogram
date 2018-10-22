@@ -57,9 +57,7 @@
     font-size: 24rpx;
 }
 
-.mar_b {
-    margin-bottom: 60rpx;
-}
+
 
 .price_sty {
     font-size: 48rpx;
@@ -88,4 +86,8 @@
 }
 .page_hd_ch::after{
     border: none;
+}
+.mar_sx{
+    margin-top: 23rpx;
+    margin-bottom:120rpx;
 }

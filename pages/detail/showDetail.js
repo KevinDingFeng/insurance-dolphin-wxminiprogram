@@ -46,6 +46,11 @@ Page({
         }
         
     },
+    go_problem:function(e){
+        wx.navigateTo({
+            url: '/pages/problem/problem'
+        })
+    },
     //跳转至下保单页面
     to_insured: function (e) {
         if (e.detail.errMsg == "getUserInfo:ok") {
