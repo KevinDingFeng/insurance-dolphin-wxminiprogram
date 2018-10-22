@@ -3,7 +3,6 @@
     "pages/index/index",
     "pages/order/writeOrder",
     "pages/detail/showDetail",
-    "pages/logs/logs",
     "pages/instructions/instructions"
   ],
   "window": {
