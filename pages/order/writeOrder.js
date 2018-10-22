@@ -742,7 +742,8 @@ Page({
     var that = this;
     var _date = util.formatDate(new Date());
     that.setData({
-      start: _date
+      start: _date,
+      flightDate: _date
     })
     that.setData({
       total_fee: options.price,
