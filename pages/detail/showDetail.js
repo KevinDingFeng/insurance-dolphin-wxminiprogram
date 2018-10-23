@@ -7,9 +7,10 @@ Page({
      * 页面的初始数据
      */
     data: {
-        price: 15,
+        price: 10,
         foreignPrice: '28',
-        innerPrice: '15',
+        innerPrice: '10',
+        del_price:"18",
         innerclasstype: '',
         foreignclasstype:'',
         tabs: ["国内", "国际"],
@@ -37,11 +38,13 @@ Page({
         let _activeIndex = this.data.activeIndex;
         if (_activeIndex == "1"){
             this.setData({
-                price: 28,
+                price: 20,
+                del_price: "28",
             });
         }else{
             this.setData({
-                price: 15,
+                price: 10,
+                del_price: "18",
             });
         }
         
@@ -65,7 +68,7 @@ Page({
                 classtype: _id+1,
             });
             wx.navigateTo({
-                url: '/pages/order/writeOrder?price=' + this.data.price + '&classtype=' + this.data.classtype
+                url: '/pages/order/writeOrder?price=' + this.data.price + '&classtype=' + this.data.classtype + "&del_price=" + this.data.del_price
             })
         }
     },

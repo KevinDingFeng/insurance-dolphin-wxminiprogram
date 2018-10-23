@@ -180,9 +180,11 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
     margin-left: 32rpx;
     margin-top: 10rpx;
     font-size: 24rpx;
-    color: #fff;
+    color: #ff4737;
     width:57%;
-    border-right: 1px solid #ddd; 
+    display: flex;
+    flex-direction: row;
+    border-right:1px solid #ddd;
 }
 .price_sty {
     font-size: 48rpx;
@@ -190,8 +192,8 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
 .page_hd_ch {
     width: 35%;
     height: 100rpx;
-    background-color: #2E66C3;
-    color: #fff;
+    background-color: #fff;
+    color: #2e66c3;
     font-size: 15px;
     border-radius: 0;
     line-height: 90rpx;
@@ -202,7 +204,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
     border: none;
 }
 .page_hd{
-    background-color: #2E66C3!important;
+    background-color: #fff!important;
 }
 /* //遮盖层 */
 .fullbg {

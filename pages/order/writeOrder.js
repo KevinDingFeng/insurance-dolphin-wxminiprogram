@@ -61,6 +61,8 @@ Page({
         packNum: 1,
         //页面显示价格
         showPrice: '',
+        //原价
+        del_price:""
     },
     //新增行李单号
     add_dh: function (e) {
@@ -750,7 +752,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
         var that = this;
         var _date = util.formatDate(new Date());
         that.setData({
@@ -761,6 +762,7 @@ Page({
             total_fee: options.price,
             showPrice: options.price,
             classtype: options.classtype,
+            del_price: options.del_price
         })
     },
 

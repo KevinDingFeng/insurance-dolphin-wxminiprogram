@@ -105,7 +105,8 @@
                     </view>
                     <view class="mar_b" style='overflow:hidden;'>
                         <image src="../../images/showDetail/gj_pf.png" style='height:222rpx;width:100%;margin-top:3px;' />
-                        <image class="mar_b" src="../../images/showDetail/gj_qx.png" style='height:222rpx;width:100%;margin-top:3px;' />
+                        <image src="../../images/showDetail/gj_qx.png" style='height:222rpx;width:100%;margin-top:3px;' />
+                        <image src="../../images/showDetail/pic.png" style='height:222rpx;width:100%;margin-top:3px;' />
                     </view>
                 </view>
             </view>
@@ -122,8 +123,13 @@
     </view> 
     <view class="page_hd">
         <view class='price_cc'>
-            <text>￥ </text>
-            <text class="price_sty"> {{price}}</text>
+            <view class='te_hui'>特惠价</view>
+            <text class='col_red mar_top'>￥ </text>
+            <text class="price_sty col_red"> {{price}}</text>
+        </view>
+        <view class='mar_left'>
+            <text class='font_s'>￥ </text>
+            <text class="price_sty font_s"> {{del_price}}</text>
         </view>
         <button class="page_hd_ch" style="position:fixed;right:10px;bottom:0px;" open-type="getUserInfo" bindgetuserinfo='to_insured' data-id='{{activeIndex}}'>
             立即投保 >

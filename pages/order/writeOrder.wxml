@@ -125,8 +125,13 @@
     <!-- 去支付 -->
     <view class="page_hd ">
         <view class='price_cc'>
-            <text>￥ </text>
-            <text class="price_sty"> {{showPrice}}</text>
+            <view class='te_hui'>特惠价</view>
+            <text class='col_red mar_top'>￥ </text>
+            <text class="price_sty col_red"> {{showPrice}}</text>
+        </view>
+        <view class='mar_left'>
+            <text class='font_s'>￥ </text>
+            <text class="font_s"> {{del_price}}</text>
         </view>
         <button class="page_hd_ch" style="position:fixed;right:10px;bottom:0px;"  bindtap='go_zf'>
             去投保 >

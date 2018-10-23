@@ -22,3 +22,28 @@
   z-index: 5;
   border-top: 1px solid #ddd;
 }
+.col_red{
+    color: #ff4737;
+}
+.te_hui{
+    background-color: #ff4737;
+    padding: 5rpx 10rpx;
+    border-radius:5px; 
+    color: #fff;
+    height: 40rpx;
+    margin-top: 16rpx;
+    margin-right: 5rpx;
+}
+.mar_left{
+    font-size: 28rpx;
+    margin-left: 216rpx;
+    color: #949494;
+    margin-top: 34rpx;
+    text-decoration: line-through;
+}
+.font_s{
+    font-size: 24rpx;
+}
+.mar_top{
+    padding-top: 30rpx;
+}
