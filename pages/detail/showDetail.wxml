@@ -26,8 +26,8 @@
                                 <view class="placeholder">保障期限</view>
                             </view>
                             <view class="weui-flex__item">
-                                <view class="placeholder">0-100岁</view>
-                                <view class="placeholder">保障年龄</view>
+                                <view class="placeholder">航班乘坐人</view>
+                                <view class="placeholder">被保险人</view>
                             </view>
                         </view>
                     </view>
@@ -74,8 +74,8 @@
                                 <view class="placeholder">保障期限</view>
                             </view>
                             <view class="weui-flex__item">
-                                <view class="placeholder">0-100岁</view>
-                                <view class="placeholder">保障年龄</view>
+                                <view class="placeholder">航班乘坐人</view>
+                                <view class="placeholder">被保险人</view>
                             </view>
                         </view>
                     </view>
