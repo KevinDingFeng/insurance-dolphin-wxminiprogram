@@ -292,20 +292,17 @@ Page({
             scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
             success: function (res) {
                 var _xl_list = that.data.xl_list;//行李信息
-                let _num = 0;
-                for (var i = 0; i <= _xl_list.length; i++) {
+                let _num = _xl_list.length;
+                for (var i = 0; i < _xl_list.length; i++) {
                     if (_xl_list[i].pack1 == "") {
                         _xl_list[i].pack1 = res.result;
-                        _num = i + 1
                         break;
-                    } else if (_xl_list[_xl_list.length - 1].pack1 != "") {
-                        _num = _xl_list.length;
+                    } else if (_xl_list[_xl_list.length-1].pack1!="") {
                         wx.showToast({
-                            title: '请先添加行李单！',
+                            title: '请先添加行李单号！',
                             icon: 'none',
                             duration: 1500
                         })
-                        break;
                     }
                 }
                 that.setData({
@@ -322,15 +319,13 @@ Page({
         let _cc = that.data.xl_list;
         let _val = e.detail.value;
         let _index = e.currentTarget.dataset.index;//当前第几个
-        let _num_cc = 1;
+        let _num_cc = _cc.length;
         if (_val == "") {
             _cc[_index].pack1 = "";
             for (var i = 0; i < _cc.length; i++) {
                 if (_cc[i].pack1 == "") {
                     _num_cc = _num_cc - 1;
-                } else {
-                    _num_cc = _num_cc + 1;
-                }
+                } 
             }
             if (_num_cc <= 0) {
                 _num_cc = 1;
@@ -653,13 +648,21 @@ Page({
             })
             return
         }
-        if (_cl_arr[0].pack1 == "") {
-            wx.showToast({
-                title: '请输入行李单号!',
-                icon: 'none',
-                duration: 1500
-            })
-            return;
+        var state = false;
+        for (let i = 0; i < _cl_arr.length;i++){
+            if (_cl_arr[i].pack1 != ""){
+                state = true;
+                return;
+            }
+            if (state !=false){
+
+            }else{
+                wx.showToast({
+                    title: '请输入行李单号!',
+                    icon: 'none',
+                    duration: 1500
+                })
+            }
         }
         //手机验证
         var myreg = /^[1][0-9][0-9]{9}$/;//手机号码正则
