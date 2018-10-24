@@ -62,13 +62,22 @@ Page({
         //页面显示价格
         showPrice: '',
         //原价
-        del_price:""
+        del_price:"",
+        state:true
     },
     //新增行李单号
     add_dh: function (e) {
         let that = this;
         let _arr = that.data.xl_list;
-        let _num = String(_arr.length + 1)
+        if (_arr[_arr.length-1].pack1==""){
+            wx.showToast({
+                title: '请先添加上一个行李单！',
+                icon: 'none',
+                duration: 2000
+            })
+            return;
+        }
+        let _num = String(_arr.length + 1);
         if (_arr.length == 5) {
             wx.showToast({
                 title: '最多添加5个行李单',
@@ -292,15 +301,12 @@ Page({
             scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
             success: function (res) {
                 var _xl_list = that.data.xl_list;//行李信息
-                let _num = _xl_list.length;
-                for (var i = 0; i < _xl_list.length; i++) {
-                    if (_xl_list[i].pack1 == "") {
-                        _xl_list[i].pack1 = res.result;
-                        break;
-                    }
-                }
-                for (var i = 0; i < _xl_list.length; i++) {
-                    if (_xl_list[i].pack1 == "") {
+                let _num = 0;
+                let state = true;
+                if (that.data.state == false) {
+                    if (state){
+                        
+                    }else{
                         wx.showToast({
                             title: '请先添加行李单号！',
                             icon: 'none',
@@ -308,11 +314,28 @@ Page({
                         })
                     }
                 }
+                for (var i = 0; i < _xl_list.length; i++) {
+                    if (_xl_list[i].pack1 == "") {
+                        _xl_list[i].pack1 = res.result;
+                        break;
+                    } 
+                }
+                for (var i = 0; i < _xl_list.length; i++) {
+                    if (_xl_list[i].pack1 != "") {
+                        _num = _num + 1;
+                    }else if(_xl_list[_xl_list.length-1].pack1 == ""){
+                        state = true;
+                    }
+                }
+                if (_xl_list[_xl_list.length - 1].pack1 != "") {
+                    state = false;
+                }
                 that.setData({
                     xl_list: _xl_list,
+                    state: state,
                     showPrice: _num * that.data.total_fee,// 
                 })
-
+                
             }
         })
     },
@@ -354,8 +377,8 @@ Page({
             if (_cc[i].pack1 != "") {
                 _num = _num + 1;
             }
-
         }
+
         that.setData({
             xl_list: _cc,
             showPrice: _num * that.data.total_fee,// 
