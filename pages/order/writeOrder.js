@@ -297,7 +297,10 @@ Page({
                     if (_xl_list[i].pack1 == "") {
                         _xl_list[i].pack1 = res.result;
                         break;
-                    } else if (_xl_list[_xl_list.length-1].pack1!="") {
+                    }
+                }
+                for (var i = 0; i < _xl_list.length; i++) {
+                    if (_xl_list[i].pack1 == "") {
                         wx.showToast({
                             title: '请先添加行李单号！',
                             icon: 'none',
@@ -685,7 +688,7 @@ Page({
         console.log(_cl_arr[0].pack1);
         console.log(hb_time == null);
         if (_name == "" || !sf_reg.test(_num) || !myreg.test(_phone) || hb_f == "" || hb_z == "" || hb_num == "" ||
-            _cl_arr[0].pack1 == "" || _checked == false) {
+            _checked == false) {
             wx.showToast({
                 title: '请完善表单信息!',
                 icon: 'none',
