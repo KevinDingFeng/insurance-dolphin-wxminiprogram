@@ -652,17 +652,16 @@ Page({
         for (let i = 0; i < _cl_arr.length;i++){
             if (_cl_arr[i].pack1 != ""){
                 state = true;
-                return;
+                break;
             }
         }
-        if (state == true) {
-
-        } else {
-            wx.showToast({
-                title: '请输入行李单号!',
-                icon: 'none',
-                duration: 1500
-            })
+        if (!state) {
+          wx.showToast({
+            title: '请输入行李单号!',
+            icon: 'none',
+            duration: 1500
+          })
+          return;
         }
         //手机验证
         var myreg = /^[1][0-9][0-9]{9}$/;//手机号码正则
