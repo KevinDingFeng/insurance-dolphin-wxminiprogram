@@ -582,7 +582,7 @@ Page({
         if (_val[0] == "false") {
             _val[0] = "true"
         } else {
-            _val[0] = ""
+            _val[0] =false
         }
         this.setData({
             items: [
