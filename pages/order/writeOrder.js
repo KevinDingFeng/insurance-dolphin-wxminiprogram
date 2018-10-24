@@ -236,6 +236,7 @@ Page({
                         console.log('城市结果返回' + res.data.data.arrCity);
                         console.log('城市结果返回' + res.data.data.depCity);
                         var city_class = that.data.classtype;
+                        
                         that.setData({
                             total_fee: res.data.data.total_fee,
                             showPrice: res.data.data.total_fee,
@@ -581,7 +582,7 @@ Page({
         if (_val[0] == "false") {
             _val[0] = "true"
         } else {
-            _val[0] = "false"
+            _val[0] = ""
         }
         this.setData({
             items: [
