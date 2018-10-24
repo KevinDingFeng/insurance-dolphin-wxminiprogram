@@ -654,15 +654,15 @@ Page({
                 state = true;
                 return;
             }
-            if (state !=false){
+        }
+        if (state == true) {
 
-            }else{
-                wx.showToast({
-                    title: '请输入行李单号!',
-                    icon: 'none',
-                    duration: 1500
-                })
-            }
+        } else {
+            wx.showToast({
+                title: '请输入行李单号!',
+                icon: 'none',
+                duration: 1500
+            })
         }
         //手机验证
         var myreg = /^[1][0-9][0-9]{9}$/;//手机号码正则
