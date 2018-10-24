@@ -23,6 +23,7 @@
 .text_size1{
     margin-left: 10px;
     font-weight: normal;
+    text-decoration: navy!important;
 }
 .text_size2{
     font-size: 26rpx;
@@ -33,6 +34,8 @@
 }
 .mar_left{
     margin-left: 25rpx;
+    text-decoration: navy!important;
+    color: #222;
 }
 .fon_w{
     font-weight: 700;
