@@ -68,6 +68,7 @@ Page({
     //新增行李单号
     add_dh: function (e) {
         let that = this;
+        that.data.state = true;
         let _arr = that.data.xl_list;
         if (_arr[_arr.length-1].pack1==""){
             wx.showToast({
@@ -304,15 +305,11 @@ Page({
                 let _num = 0;
                 let state = true;
                 if (that.data.state == false) {
-                    if (state){
-                        
-                    }else{
-                        wx.showToast({
-                            title: '请先添加行李单号！',
-                            icon: 'none',
-                            duration: 1500
-                        })
-                    }
+                    wx.showToast({
+                        title: '请先增加一条行李单号！',
+                        icon: 'none',
+                        duration: 1500
+                    })
                 }
                 for (var i = 0; i < _xl_list.length; i++) {
                     if (_xl_list[i].pack1 == "") {
@@ -323,12 +320,10 @@ Page({
                 for (var i = 0; i < _xl_list.length; i++) {
                     if (_xl_list[i].pack1 != "") {
                         _num = _num + 1;
+                        state = false;
                     }else if(_xl_list[_xl_list.length-1].pack1 == ""){
                         state = true;
                     }
-                }
-                if (_xl_list[_xl_list.length - 1].pack1 != "") {
-                    state = false;
                 }
                 that.setData({
                     xl_list: _xl_list,
@@ -347,6 +342,7 @@ Page({
         let _index = e.currentTarget.dataset.index;//当前第几个
         let _num_cc = _cc.length;
         if (_val == "") {
+            that.data.state = true;
             _cc[_index].pack1 = "";
             for (var i = 0; i < _cc.length; i++) {
                 if (_cc[i].pack1 == "") {
