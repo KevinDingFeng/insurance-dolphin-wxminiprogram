@@ -15,7 +15,7 @@
         <view class="weui-cell">
             <view class="peo_xx_left">证件类型</view>
             <view class="weui-cell__ft peo_xx_right">
-                <input placeholder="请选择证件类型>" class='_input' name="userName" bindtap="open"  value="{{zj_typeN}}"/> 
+                <view class='zj_type'  bindtap="open">{{zj_typeN==""?"请选择证件类型 >":zj_typeN}}</view>
             </view>
         </view> 
         <view class="weui-cell">

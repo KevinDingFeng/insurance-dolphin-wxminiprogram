@@ -91,7 +91,10 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
     width: 38%;
     font-size: 20rpx;
 }
-
+.zj_type{
+    color:#808080;
+    font-size:26rpx;
+}
 .title_sty1 {
     width: 37% !important;
     font-size: 20rpx;

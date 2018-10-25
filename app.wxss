@@ -36,7 +36,7 @@
 }
 .mar_left{
     font-size: 28rpx;
-    margin-left: 216rpx;
+    margin-left: 243rpx;
     color: #949494;
     margin-top: 34rpx;
     text-decoration: line-through;
