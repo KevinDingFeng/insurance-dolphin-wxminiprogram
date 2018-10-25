@@ -60,7 +60,10 @@ Page({
         del_price:"",
         state:true,
         remind:1,
-        _num:"1"
+        _num:"1",//行李单数量
+        cardType:"",//证件类型
+        itemList: ["身份证", "护照"],
+        zj_typeN:""//证件名称
     },
     //新增行李单号
     add_dh: function (e) {
@@ -97,11 +100,16 @@ Page({
     },
     //点击证件类型
     open: function () {
+        let that = this;
         wx.showActionSheet({
-            itemList: ["身份证"],
+            itemList: ["身份证","护照"],
             success: function (res) {
                 if (!res.cancel) {
                     console.log(res.tapIndex)
+                    that.setData({
+                        cardType: res.tapIndex,
+                        zj_typeN: that.data.itemList[res.tapIndex]
+                    })
                 }
             }
         });
@@ -421,26 +429,58 @@ Page({
     peo_num_Blur: function (e) {
         let that = this;
         let _num = e.detail.value;
-        let _name = that.data.user_name;//姓名
-        var sf_reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/; //身份证号
-        if (!sf_reg.test(_num)) {
+        let cardType = String(that.data.cardType);//判断证件类型
+        if (cardType == ""){
             wx.showToast({
-                title: '身份证号格式不正确！',
+                title: '请先选择证件类型！',
                 icon: 'none',
                 duration: 1500
             })
-        } else if (_num == "") {
-            wx.showToast({
-                title: '身份证号不能为空！',
-                icon: 'none',
-                duration: 1500
-            })
-            //return
-        } else {
-            that.setData({
-                user_num: _num
-            })
+            return;
         }
+        var sf_reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/; //身份证号
+        var filter_hz = /^[a-zA-Z0-9]{3,21}$/;//护照号
+        
+        if (cardType == "0"){
+            if (!sf_reg.test(_num)) {
+                wx.showToast({
+                    title: '身份证号格式不正确！',
+                    icon: 'none',
+                    duration: 1500
+                })
+            } else if (_num == "") {
+                wx.showToast({
+                    title: '身份证号不能为空！',
+                    icon: 'none',
+                    duration: 1500
+                })
+                //return
+            } else {
+                that.setData({
+                    user_num: _num
+                })
+            }
+        }else{
+            if (_num == "") {
+                wx.showToast({
+                    title: '护照号不能为空！',
+                    icon: 'none',
+                    duration: 1500
+                })
+                //return
+            } else if (!filter_hz.test(_num)) {
+                wx.showToast({
+                    title: '护照号格式不正确！',
+                    icon: 'none',
+                    duration: 1500
+                })
+            }else {
+                that.setData({
+                    user_num: _num
+                })
+            }
+        }
+        
         return false;
 
     },
@@ -572,7 +612,8 @@ Page({
                 'orderAmount': that.data.showPrice,
                 'insuranttel': that.data.telNumber,
                 'classestype': that.data.classtype,
-                "markString": c_arr
+                "markString": c_arr,
+                "cardType": that.data.cardType
             },
             success: function (res) {
                 that.requestPayment(res.data);
@@ -630,7 +671,8 @@ Page({
     go_zf: function (e) {
         var that = this;
         let _name = that.data.user_name;//姓名
-        let _num = that.data.user_num;//身份证号
+        let _cardType = that.data.cardType;//证件类型
+        let _num = that.data.user_num;//证件号
         let _phone = that.data.telNumber;//手机号
         let hb_f = that.data.depCity;//始发站
         let hb_z = that.data.arrCity;//终点站
@@ -648,9 +690,17 @@ Page({
             })
             return;
         }
+        if (_cardType == "") {
+            wx.showToast({
+                title: '请先选择证件类型!',
+                icon: 'none',
+                duration: 1500
+            })
+            return;
+        }
         if (_num == "") {
             wx.showToast({
-                title: '身份证号有误！',
+                title: '证件号不能为空！',
                 icon: 'none',
                 duration: 1500
             })
@@ -725,7 +775,7 @@ Page({
         }
         console.log(_cl_arr[0].pack1);
         console.log(hb_time == null);
-        if (_name == "" || !sf_reg.test(_num) || !myreg.test(_phone) || hb_f == "" || hb_z == "" || hb_num == "" ||
+        if (_name == "" || !sf_reg.test(_num) || !myreg.test(_phone) || hb_f == "" || hb_z == "" || hb_num == "" ||  _cardType == "" ||
             _checked == false) {
             wx.showToast({
                 title: '请完善表单信息!',
