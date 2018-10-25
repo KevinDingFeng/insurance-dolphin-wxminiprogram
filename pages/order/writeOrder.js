@@ -59,7 +59,8 @@ Page({
         //原价
         del_price:"",
         state:true,
-        remind:1
+        remind:1,
+        _num:"1"
     },
     //新增行李单号
     add_dh: function (e) {
@@ -205,7 +206,7 @@ Page({
                         depCity: res.data.data.depCity,
                         arrCity: res.data.data.arrCity,
                         total_fee: res.data.data.total_fee,
-                        showPrice: res.data.data.total_fee,
+                        showPrice: that.data._num *res.data.data.total_fee,
                         del_price: res.data.data.del_price,
                         classtype: res.data.data.classtype
                     })
@@ -264,7 +265,7 @@ Page({
                         
                         that.setData({
                             total_fee: res.data.data.total_fee,
-                            showPrice: res.data.data.total_fee,
+                            showPrice: that.data._num *res.data.data.total_fee,
                             del_price: res.data.data.del_price,
                             classtype: res.data.data.classtype,
                             depCity: res.data.data.depCity,
@@ -344,6 +345,7 @@ Page({
                 that.setData({
                     xl_list: _xl_list,
                     state: state,
+                    _num:_num,
                     showPrice: _num * that.data.total_fee,// 
                 })
                 
@@ -393,6 +395,7 @@ Page({
 
         that.setData({
             xl_list: _cc,
+            _num: _num,
             showPrice: _num * that.data.total_fee,// 
         })
     },
