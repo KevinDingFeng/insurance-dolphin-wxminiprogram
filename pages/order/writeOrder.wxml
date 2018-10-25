@@ -59,7 +59,7 @@
         <view class="weui-cell">
             <view class="peo_xx_left">始发站</view>
             <view class="weui-cell__ft peo_xx_right">
-                <input placeholder="请输入始发站" class='_input' value='{{depCity}}' name="depCity" bindinput='startInput'  bindblur='hb_sf_Blur'/>
+                <input placeholder="请输入始发站" class='_input' value='{{depCity}}' name="depCity" bindinput='startInput'  bindblur='hb_sf_Blur' bindblur='getPrice'/>
             </view>
         </view>
         <view class="weui-cell">

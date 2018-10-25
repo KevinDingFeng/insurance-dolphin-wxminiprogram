@@ -216,6 +216,11 @@ Page({
                     console.log(res.data.data.depCity);
                     console.log(res.data.data.arrCity);
                     var city_class = that.data.classtype;
+                    if (that.data._num == "") {
+                      that.setData({
+                        _num: "1"
+                      })
+                    }
                     that.setData({
                         depCity: res.data.data.depCity,
                         arrCity: res.data.data.arrCity,
@@ -251,19 +256,7 @@ Page({
         var that = this;
         var _depCity = that.data.depCity;
         var _arrCity = that.data.arrCity;
-        if (_depCity == "") {
-            wx.showToast({
-                title: '请输入始发站！',
-                icon: 'none',
-                duration: 3000
-            })
-        } else if (_arrCity == "") {
-            wx.showToast({
-                title: '请输入终点站！',
-                icon: 'none',
-                duration: 3000
-            })
-        } else {
+        if (_depCity != "" && _arrCity != "") {
             wx.request({
                 url: config.baseUrl + '/customer/getPrice',
                 header: {
@@ -276,6 +269,11 @@ Page({
                         console.log('城市结果返回' + res.data.data.arrCity);
                         console.log('城市结果返回' + res.data.data.depCity);
                         var city_class = that.data.classtype;
+                        if (that.data._num==""){
+                          that.setData({
+                            _num:"1"
+                          })
+                          }
                         that.setData({
                             total_fee: res.data.data.total_fee,
                             showPrice: that.data._num * res.data.data.total_fee,
