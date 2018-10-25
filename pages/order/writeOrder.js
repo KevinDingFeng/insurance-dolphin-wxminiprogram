@@ -45,11 +45,6 @@ Page({
         arrCity: '',//终点站
         telNumber: '',
         markNumber: [],
-        pNo1: 0,
-        pNo2: 0,
-        pNo3: 0,
-        pNo4: 0,
-        pNo5: 0,
         flag: 'true',
         depCityCode: '',
         arrCityCode: '',
@@ -63,7 +58,8 @@ Page({
         showPrice: '',
         //原价
         del_price:"",
-        state:true
+        state:true,
+        remind:1
     },
     //新增行李单号
     add_dh: function (e) {
@@ -639,7 +635,7 @@ Page({
         let hb_time = that.data.flightDate;//航班时间
         let _cl_arr = that.data.xl_list;//行李单号
         let _checked = that.data.items[0].checked;//投保通知
-
+        let _remind = that.data.remind;
         //人员信息
         if (_name == "") {
             wx.showToast({
@@ -734,9 +730,27 @@ Page({
                 duration: 1500
             })
         } else {
-            console.log(_name);
             if (wx.getStorageSync('openId') != null) {
+              if (_remind==1){
+                wx.showModal({
+                  title: '请确认填写信息全部正确!',
+                  confirmText: "确定",
+                  cancelText: "取消",
+                  success: function (res) {
+                    console.log(res);
+                    if (res.confirm) {
+                      that.setData({
+                        remind: 2,
+                      })
+                    } else {
+                      that.order(wx.getStorageSync('openId'));
+                    }
+                  }
+                })
+               
+              }else{
                 that.order(wx.getStorageSync('openId'));
+              }
             } else {
                 console.log('缓存数据中不存在openId');
             }
@@ -748,39 +762,6 @@ Page({
             url: '/pages/index/index'
         })
     },
-    // formSubmit: function (e) {
-    //     var that = this;
-    //     console.log(e.detail.value);
-    //     that.setData({
-    //         'markNumber[0].mark': e.detail.value.mark1,
-    //         'markNumber[1].mark': e.detail.value.mark2,
-    //         'markNumber[2].mark': e.detail.value.mark3,
-    //         'markNumber[3].mark': e.detail.value.mark4,
-    //         'markNumber[4].mark': e.detail.value.mark5,
-    //         userName: e.detail.value.userName,
-    //         userId: e.detail.value.userId,
-    //         flightDate: e.detail.value.flightDate,
-    //         flightNo: e.detail.value.flightNo,
-    //         depCity: e.detail.value.depCity,
-    //         arrCity: e.detail.value.arrCity,
-
-    //     })
-    //     console.log(that.data.arrCity.length);
-    //     if (e.detail.value.length == 0 || e.detail.value.length == 0 ||
-    //         that.data.flightNo.length == 0 || that.data.flightDate.length == 0 ||
-    //         that.data.depCity.length == 0 || that.data.arrCity.length == 0 ||
-    //         that.data.telNumber.length == 0 || that.data.flag == 'false') {
-    //         wx.showToast({ title: '请完善表单信息！', icon: 'none', duration: 1500 })
-    //     } else {
-    //         if (wx.getStorageSync('openId') != null) {
-    //             that.order(wx.getStorageSync('openId'));
-    //         } else {
-    //             console.log('缓存数据中不存在openId');
-    //         }
-    //     }
-
-    //     console.log(that.data.markNumber);
-    // },
     //去投保须知
     go_notice: function () {
         wx.navigateTo({
