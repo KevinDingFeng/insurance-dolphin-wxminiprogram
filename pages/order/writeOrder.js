@@ -204,12 +204,31 @@ Page({
                 } else {
                     console.log(res.data.data.depCity);
                     console.log(res.data.data.arrCity);
+                    var city_class = that.data.classtype;
                     that.setData({
                         depCity: res.data.data.depCity,
                         arrCity: res.data.data.arrCity,
                         total_fee: res.data.data.total_fee,
+                        showPrice: res.data.data.total_fee,
+                        del_price: res.data.data.del_price,
                         classtype: res.data.data.classtype
                     })
+                  if (city_class != that.data.classtype) {
+                    console.log('类型不相等');
+                    if (res.data.data.classtype == '1') {
+                      wx.showToast({
+                        title: '此航班为国内航班，价格为国内航班行李险价格！',
+                        icon: 'none',
+                        duration: 3000
+                      })
+                    } else {
+                      wx.showToast({
+                        title: '此航班为国际航班，价格为国际航班行李险价格！',
+                        icon: 'none',
+                        duration: 3000
+                      })
+                    }
+                  }
                 }
             },
 
@@ -250,6 +269,7 @@ Page({
                         that.setData({
                             total_fee: res.data.data.total_fee,
                             showPrice: res.data.data.total_fee,
+                            del_price: res.data.data.del_price,
                             classtype: res.data.data.classtype,
                             depCity: res.data.data.depCity,
                             arrCity: res.data.data.arrCity,
@@ -724,7 +744,7 @@ Page({
 
     },
     go_back: function () {
-        wx.navigateTo({
+        wx.redirectTo({
             url: '/pages/index/index'
         })
     },
