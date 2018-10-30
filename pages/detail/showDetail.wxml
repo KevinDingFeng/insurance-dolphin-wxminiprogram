@@ -49,10 +49,10 @@
                                 <view class="weui-cell__bd">国内托运行李箱体损失赔付</view>
                                 <view class="weui-cell__ft">100元</view>
                             </view>
-                            <view class="weui-cell">
+                            <!--<view class="weui-cell">
                                 <view class="weui-cell__bd">国内托运行李迟运赔付</view>
                                 <view class="weui-cell__ft">150元</view>
-                            </view>
+                            </view>-->
                         </view>
                     </view>
                     <view class="mar_b" style='overflow:hidden;'>
@@ -97,10 +97,10 @@
                                 <view class="weui-cell__bd">国际托运行李箱体损失赔付</view>
                                 <view class="weui-cell__ft">150元</view>
                             </view>
-                            <view class="weui-cell">
+                           <!-- <view class="weui-cell">
                                 <view class="weui-cell__bd">国际托运行李迟运赔付</view>
                                 <view class="weui-cell__ft">150元</view>
-                            </view>
+                            </view>-->
                         </view>
                     </view>
                     <view class="mar_b" style='overflow:hidden;'>
