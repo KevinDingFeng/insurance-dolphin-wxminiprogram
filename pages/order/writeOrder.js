@@ -595,11 +595,11 @@ Page({
         let _arr = that.data.xl_list;
         let c_arr = [];
         for (let i = 0; i < _arr.length; i++) {
-            let _obj = {};
-            _obj = {
-                mark: _arr[i].pack1
-            }
-            if (_obj.mark == "") {
+          let _obj = _arr[i].pack1;
+            // _obj = {
+            //     mark: _arr[i].pack1
+            // }
+            if (_obj == "") {
 
             } else {
                 c_arr.push(_obj)
@@ -607,6 +607,7 @@ Page({
         }
         wx.request({
             url: config.baseUrl + '/pay/order',
+            method:"POST",
             header: {
                 'content-type': 'application/x-www-form-urlencoded'
             },
